@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KolkoIKrzyzyk", "KolkoIKrzyzyk\KolkoIKrzyzyk.csproj", "{2F1B1F97-F216-4BCC-B65E-4D0F94E515AE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2F1B1F97-F216-4BCC-B65E-4D0F94E515AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F1B1F97-F216-4BCC-B65E-4D0F94E515AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F1B1F97-F216-4BCC-B65E-4D0F94E515AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F1B1F97-F216-4BCC-B65E-4D0F94E515AE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0CE2D149-375B-4565-9D15-5CF09E6E251C}
+	EndGlobalSection
+EndGlobal
