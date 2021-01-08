@@ -7,3 +7,4 @@ C:\Users\Krzysztof\source\repos\KolkoIKrzyzyk\KolkoIKrzyzyk\obj\Release\KolkoIKr
 C:\Users\Krzysztof\source\repos\KolkoIKrzyzyk\KolkoIKrzyzyk\obj\Release\KolkoIKrzyzyk.csproj.CoreCompileInputs.cache
 C:\Users\Krzysztof\source\repos\KolkoIKrzyzyk\KolkoIKrzyzyk\obj\Release\KolkoIKrzyzyk.exe
 C:\Users\Krzysztof\source\repos\KolkoIKrzyzyk\KolkoIKrzyzyk\obj\Release\KolkoIKrzyzyk.pdb
+C:\Users\Krzysztof\source\repos\KolkoIKrzyzyk\KolkoIKrzyzyk\obj\Release\KolkoIKrzyzyk.csprojAssemblyReference.cache
