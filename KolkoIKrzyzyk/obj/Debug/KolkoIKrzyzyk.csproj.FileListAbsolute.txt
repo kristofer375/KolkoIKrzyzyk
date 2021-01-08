@@ -1,0 +1,10 @@
+C:\Users\Krzysztof\source\repos\KolkoIKrzyzyk\KolkoIKrzyzyk\bin\Debug\KolkoIKrzyzyk.exe.config
+C:\Users\Krzysztof\source\repos\KolkoIKrzyzyk\KolkoIKrzyzyk\bin\Debug\KolkoIKrzyzyk.exe
+C:\Users\Krzysztof\source\repos\KolkoIKrzyzyk\KolkoIKrzyzyk\bin\Debug\KolkoIKrzyzyk.pdb
+C:\Users\Krzysztof\source\repos\KolkoIKrzyzyk\KolkoIKrzyzyk\obj\Debug\KolkoIKrzyzyk.csprojAssemblyReference.cache
+C:\Users\Krzysztof\source\repos\KolkoIKrzyzyk\KolkoIKrzyzyk\obj\Debug\KolkoIKrzyzyk.Form1.resources
+C:\Users\Krzysztof\source\repos\KolkoIKrzyzyk\KolkoIKrzyzyk\obj\Debug\KolkoIKrzyzyk.Properties.Resources.resources
+C:\Users\Krzysztof\source\repos\KolkoIKrzyzyk\KolkoIKrzyzyk\obj\Debug\KolkoIKrzyzyk.csproj.GenerateResource.cache
+C:\Users\Krzysztof\source\repos\KolkoIKrzyzyk\KolkoIKrzyzyk\obj\Debug\KolkoIKrzyzyk.csproj.CoreCompileInputs.cache
+C:\Users\Krzysztof\source\repos\KolkoIKrzyzyk\KolkoIKrzyzyk\obj\Debug\KolkoIKrzyzyk.exe
+C:\Users\Krzysztof\source\repos\KolkoIKrzyzyk\KolkoIKrzyzyk\obj\Debug\KolkoIKrzyzyk.pdb
