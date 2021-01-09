@@ -38,12 +38,12 @@ namespace KolkoIKrzyzyk
         }
         public void ChechForWinner()
         {
+            
             for(int i=0; i <8; i++)
             {
                 String combination = "";
                 int one = 0, two = 0, three = 0;
-
-                switch(i)
+                switch (i)
                 {
                     case 0:
                         combination = gameBoard[0] + gameBoard[4] + gameBoard[8];
@@ -103,13 +103,15 @@ namespace KolkoIKrzyzyk
                     ChangeColor(two);
                     ChangeColor(three);
                     MessageBox.Show("O wygrało grę!", "Mamy zwycięzce", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    break;
                 } else if (combination.Equals("XXX"))
                 {
                     ChangeColor(one);
                     ChangeColor(two);
                     ChangeColor(three);
                     MessageBox.Show("X wygrało grę!", "mamy zwycięzce", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                } else
+                    break;
+                } else if (i == 7)
                 {
                     ChechDraw();
                 }
