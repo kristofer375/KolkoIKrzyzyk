@@ -25,14 +25,14 @@ namespace KolkoIKrzyzyk
                 return "X";
             return "O";
         }
-        public System.Drawing.Color DetermineColor(String symbol)
+        public Color DetermineColor(String symbol)
         {
             if(symbol.Equals("O"))
             {
-                return System.Drawing.Color.Aqua;
+                return ColorTranslator.FromHtml("#00FFFF");
             } else if(symbol.Equals("X"))
             {
-                return System.Drawing.Color.Chartreuse;
+                return ColorTranslator.FromHtml("#7FFF00");
             }
             return System.Drawing.Color.White;
         }
@@ -99,16 +99,18 @@ namespace KolkoIKrzyzyk
 
                 if(combination.Equals("OOO"))
                 {
-                    ChangeColor(one);
-                    ChangeColor(two);
-                    ChangeColor(three);
+                    ButtonSwitch();
+                    ChangeColor(one, "O");
+                    ChangeColor(two, "O");
+                    ChangeColor(three, "O");
                     MessageBox.Show("O wygrało grę!", "Mamy zwycięzce", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     break;
                 } else if (combination.Equals("XXX"))
                 {
-                    ChangeColor(one);
-                    ChangeColor(two);
-                    ChangeColor(three);
+                    ButtonSwitch();
+                    ChangeColor(one, "X");
+                    ChangeColor(two, "X");
+                    ChangeColor(three, "X");
                     MessageBox.Show("X wygrało grę!", "mamy zwycięzce", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     break;
                 } else if (i == 7)
@@ -127,46 +129,83 @@ namespace KolkoIKrzyzyk
                     counter++;
                 if(counter == 9)
                 {
+                    ButtonSwitch();
                     MessageBox.Show("Remis!", "Brak zwycięzcy", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
         }
-        public void ChangeColor(int number)
+        public void ChangeColor(int number, string symbol)
         {
             switch(number)
             {
                 case 0:
-                    button1.BackColor = System.Drawing.Color.Red;
+                    if(symbol == "X")
+                        button1.BackColor = System.Drawing.ColorTranslator.FromHtml("#468C00");
+                    else
+                        button1.BackColor = System.Drawing.ColorTranslator.FromHtml("#009494");
                     break;
                 case 1:
-                    button2.BackColor = System.Drawing.Color.Red;
+                    if (symbol == "X")
+                        button2.BackColor = System.Drawing.ColorTranslator.FromHtml("#468C00");
+                    else
+                        button2.BackColor = System.Drawing.ColorTranslator.FromHtml("#009494");
                     break;
                 case 2:
-                    button3.BackColor = System.Drawing.Color.Red;
+                    if (symbol == "X")
+                        button3.BackColor = System.Drawing.ColorTranslator.FromHtml("#468C00");
+                    else
+                        button3.BackColor = System.Drawing.ColorTranslator.FromHtml("#009494");
                     break;
                 case 3:
-                    button4.BackColor = System.Drawing.Color.Red;
+                    if (symbol == "X")
+                        button4.BackColor = System.Drawing.ColorTranslator.FromHtml("#468C00");
+                    else
+                        button4.BackColor = System.Drawing.ColorTranslator.FromHtml("#009494");
                     break;
                 case 4:
-                    button5.BackColor = System.Drawing.Color.Red;
+                    if (symbol == "X")
+                        button5.BackColor = System.Drawing.ColorTranslator.FromHtml("#468C00");
+                    else
+                        button5.BackColor = System.Drawing.ColorTranslator.FromHtml("#009494");
                     break;
                 case 5:
-                    button6.BackColor = System.Drawing.Color.Red;
+                    if (symbol == "X")
+                        button6.BackColor = System.Drawing.ColorTranslator.FromHtml("#468C00");
+                    else
+                        button6.BackColor = System.Drawing.ColorTranslator.FromHtml("#009494");
                     break;
                 case 6:
-                    button7.BackColor = System.Drawing.Color.Red;
+                    if (symbol == "X")
+                        button7.BackColor = System.Drawing.ColorTranslator.FromHtml("#468C00");
+                    else
+                        button7.BackColor = System.Drawing.ColorTranslator.FromHtml("#009494");
                     break;
                 case 7:
-                    button8.BackColor = System.Drawing.Color.Red;
+                    if (symbol == "X")
+                        button8.BackColor = System.Drawing.ColorTranslator.FromHtml("#468C00");
+                    else
+                        button8.BackColor = System.Drawing.ColorTranslator.FromHtml("#009494");
                     break;
                 case 8:
-                    button9.BackColor = System.Drawing.Color.Red;
+                    if (symbol == "X")
+                        button9.BackColor = System.Drawing.ColorTranslator.FromHtml("#468C00");
+                    else
+                        button9.BackColor = System.Drawing.ColorTranslator.FromHtml("#009494");
                     break;
             }
         }
         public void Reset()
         {
             currentTurn = 0;
+            button1.Enabled = true;
+            button2.Enabled = true;
+            button3.Enabled = true;
+            button4.Enabled = true;
+            button5.Enabled = true;
+            button6.Enabled = true;
+            button7.Enabled = true;
+            button8.Enabled = true;
+            button9.Enabled = true;
             button1.Text = "";
             button2.Text = "";
             button3.Text = "";
@@ -186,6 +225,18 @@ namespace KolkoIKrzyzyk
             button8.BackColor = System.Drawing.Color.White;
             button9.BackColor = System.Drawing.Color.White;
             gameBoard = new string[9];
+        }
+        public void ButtonSwitch()
+        {
+            button1.Enabled = !button1.Enabled;
+            button2.Enabled = !button2.Enabled;
+            button3.Enabled = !button3.Enabled;
+            button4.Enabled = !button4.Enabled;
+            button5.Enabled = !button5.Enabled;
+            button6.Enabled = !button6.Enabled;
+            button7.Enabled = !button7.Enabled;
+            button8.Enabled = !button8.Enabled;
+            button9.Enabled = !button9.Enabled;
         }
 
         private void button1_Click(object sender, EventArgs e)

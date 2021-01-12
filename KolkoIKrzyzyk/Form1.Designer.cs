@@ -39,13 +39,15 @@ namespace KolkoIKrzyzyk
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.White;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button1.Location = new System.Drawing.Point(13, 9);
+            this.button1.Location = new System.Drawing.Point(36, 180);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 100);
             this.button1.TabIndex = 0;
@@ -56,7 +58,7 @@ namespace KolkoIKrzyzyk
             // 
             this.button2.BackColor = System.Drawing.Color.White;
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button2.Location = new System.Drawing.Point(119, 9);
+            this.button2.Location = new System.Drawing.Point(142, 180);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(100, 100);
             this.button2.TabIndex = 1;
@@ -67,7 +69,7 @@ namespace KolkoIKrzyzyk
             // 
             this.button3.BackColor = System.Drawing.Color.White;
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button3.Location = new System.Drawing.Point(225, 9);
+            this.button3.Location = new System.Drawing.Point(248, 180);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(100, 100);
             this.button3.TabIndex = 2;
@@ -78,7 +80,7 @@ namespace KolkoIKrzyzyk
             // 
             this.button4.BackColor = System.Drawing.Color.White;
             this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button4.Location = new System.Drawing.Point(13, 115);
+            this.button4.Location = new System.Drawing.Point(36, 286);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(100, 100);
             this.button4.TabIndex = 3;
@@ -89,7 +91,7 @@ namespace KolkoIKrzyzyk
             // 
             this.button5.BackColor = System.Drawing.Color.White;
             this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button5.Location = new System.Drawing.Point(119, 115);
+            this.button5.Location = new System.Drawing.Point(142, 286);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(100, 100);
             this.button5.TabIndex = 4;
@@ -100,7 +102,7 @@ namespace KolkoIKrzyzyk
             // 
             this.button6.BackColor = System.Drawing.Color.White;
             this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button6.Location = new System.Drawing.Point(225, 115);
+            this.button6.Location = new System.Drawing.Point(248, 286);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(100, 100);
             this.button6.TabIndex = 5;
@@ -111,7 +113,7 @@ namespace KolkoIKrzyzyk
             // 
             this.button7.BackColor = System.Drawing.Color.White;
             this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button7.Location = new System.Drawing.Point(13, 221);
+            this.button7.Location = new System.Drawing.Point(36, 392);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(100, 100);
             this.button7.TabIndex = 6;
@@ -122,7 +124,7 @@ namespace KolkoIKrzyzyk
             // 
             this.button8.BackColor = System.Drawing.Color.White;
             this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button8.Location = new System.Drawing.Point(119, 221);
+            this.button8.Location = new System.Drawing.Point(142, 392);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(100, 100);
             this.button8.TabIndex = 7;
@@ -133,7 +135,7 @@ namespace KolkoIKrzyzyk
             // 
             this.button9.BackColor = System.Drawing.Color.White;
             this.button9.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button9.Location = new System.Drawing.Point(225, 221);
+            this.button9.Location = new System.Drawing.Point(248, 392);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(100, 100);
             this.button9.TabIndex = 8;
@@ -143,7 +145,7 @@ namespace KolkoIKrzyzyk
             // button10
             // 
             this.button10.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button10.Location = new System.Drawing.Point(13, 328);
+            this.button10.Location = new System.Drawing.Point(36, 500);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(312, 55);
             this.button10.TabIndex = 9;
@@ -151,11 +153,37 @@ namespace KolkoIKrzyzyk
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.Color.Chartreuse;
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.textBox1.Location = new System.Drawing.Point(30, 116);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(112, 24);
+            this.textBox1.TabIndex = 10;
+            this.textBox1.Text = "Gracz X";
+            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textBox2
+            // 
+            this.textBox2.BackColor = System.Drawing.Color.Cyan;
+            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.textBox2.Location = new System.Drawing.Point(242, 116);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
+            this.textBox2.Size = new System.Drawing.Size(112, 24);
+            this.textBox2.TabIndex = 11;
+            this.textBox2.Text = "Gracz O";
+            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(337, 395);
+            this.ClientSize = new System.Drawing.Size(384, 586);
+            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button8);
@@ -169,8 +197,9 @@ namespace KolkoIKrzyzyk
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Kółko i krzyżyk (v.2)";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -186,6 +215,8 @@ namespace KolkoIKrzyzyk
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox2;
     }
 }
 
