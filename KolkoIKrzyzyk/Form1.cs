@@ -19,6 +19,7 @@ namespace KolkoIKrzyzyk
 
         String[] gameBoard = new string[9];
         int currentTurn = 0;
+        bool wygrana = false;
         public String ReturneSymble(int turn)
         {
             if(turn % 2 == 1)
@@ -103,7 +104,7 @@ namespace KolkoIKrzyzyk
                     ChangeColor(one, "O");
                     ChangeColor(two, "O");
                     ChangeColor(three, "O");
-                    MessageBox.Show("O wygrało grę!", "Mamy zwycięzce", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    wygrana = true;
                     break;
                 } else if (combination.Equals("XXX"))
                 {
@@ -111,7 +112,7 @@ namespace KolkoIKrzyzyk
                     ChangeColor(one, "X");
                     ChangeColor(two, "X");
                     ChangeColor(three, "X");
-                    MessageBox.Show("X wygrało grę!", "mamy zwycięzce", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    wygrana = true;
                     break;
                 } else if (i == 7)
                 {
@@ -130,7 +131,7 @@ namespace KolkoIKrzyzyk
                 if(counter == 9)
                 {
                     ButtonSwitch();
-                    MessageBox.Show("Remis!", "Brak zwycięzcy", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    label1.Text = "Remis";
                 }
             }
         }
@@ -197,6 +198,10 @@ namespace KolkoIKrzyzyk
         public void Reset()
         {
             currentTurn = 0;
+            wygrana = false;
+            label1.Text = "Runda nr 1 - Gracz X";
+            textBox1.BorderStyle = BorderStyle.Fixed3D;
+            textBox2.BorderStyle = BorderStyle.None;
             button1.Enabled = true;
             button2.Enabled = true;
             button3.Enabled = true;
@@ -238,6 +243,65 @@ namespace KolkoIKrzyzyk
             button8.Enabled = !button8.Enabled;
             button9.Enabled = !button9.Enabled;
         }
+        public void Rundy()
+        {
+            if(label1.Text != "Remis")
+            {
+                label1.Text = "";
+                if (textBox1.BorderStyle == BorderStyle.None)
+                {
+                    textBox1.BorderStyle = BorderStyle.Fixed3D;
+                    textBox2.BorderStyle = BorderStyle.None;
+                }
+                else
+                {
+                    textBox1.BorderStyle = BorderStyle.None;
+                    textBox2.BorderStyle = BorderStyle.Fixed3D;
+                }
+                if (wygrana)
+                {
+                    switch (currentTurn % 2)
+                    {
+                        case 0:
+                            label1.Text += "Wygrał Gracz O w ";
+                            break;
+                        case 1:
+                            label1.Text += "Wygrał Gracz X w ";
+                            break;
+                    }
+                }
+                switch ((currentTurn-1) / 2)
+                {
+                    case 0:
+                        label1.Text += "Runda nr 1";
+                        break;
+                    case 1:
+                        label1.Text += "Runda nr 2";
+                        break;
+                    case 2:
+                        label1.Text += "Runda nr 3";
+                        break;
+                    case 3:
+                        label1.Text += "Runda nr 4";
+                        break;
+                    case 4:
+                        label1.Text += "Runda nr 5";
+                        break;
+                }
+                if (!wygrana)
+                {
+                    switch (currentTurn % 2)
+                    {
+                        case 0:
+                            label1.Text += " - Gracz X";
+                            break;
+                        case 1:
+                            label1.Text += " - Gracz O";
+                            break;
+                    }
+                }
+            }
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -247,6 +311,7 @@ namespace KolkoIKrzyzyk
             button1.BackColor = buttonColor;
             button1.Text = gameBoard[0];
             ChechForWinner();
+            Rundy();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -257,6 +322,7 @@ namespace KolkoIKrzyzyk
             button2.BackColor = buttonColor;
             button2.Text = gameBoard[1];
             ChechForWinner();
+            Rundy();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -267,6 +333,7 @@ namespace KolkoIKrzyzyk
             button3.BackColor = buttonColor;
             button3.Text = gameBoard[2];
             ChechForWinner();
+            Rundy();
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -277,6 +344,7 @@ namespace KolkoIKrzyzyk
             button4.BackColor = buttonColor;
             button4.Text = gameBoard[3];
             ChechForWinner();
+            Rundy();
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -287,6 +355,7 @@ namespace KolkoIKrzyzyk
             button5.BackColor = buttonColor;
             button5.Text = gameBoard[4];
             ChechForWinner();
+            Rundy();
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -297,6 +366,7 @@ namespace KolkoIKrzyzyk
             button6.BackColor = buttonColor;
             button6.Text = gameBoard[5];
             ChechForWinner();
+            Rundy();
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -307,6 +377,7 @@ namespace KolkoIKrzyzyk
             button7.BackColor = buttonColor;
             button7.Text = gameBoard[6];
             ChechForWinner();
+            Rundy();
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -317,6 +388,7 @@ namespace KolkoIKrzyzyk
             button8.BackColor = buttonColor;
             button8.Text = gameBoard[7];
             ChechForWinner();
+            Rundy();
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -327,11 +399,22 @@ namespace KolkoIKrzyzyk
             button9.BackColor = buttonColor;
             button9.Text = gameBoard[8];
             ChechForWinner();
+            Rundy();
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
             Reset();
+        }
+
+        private void nowaGraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Reset();
+        }
+
+        private void oProgramieToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Kółko i krzyżyk\n\nAutor: Krzysztof Żmuda\nWersja: 2\nRok Wydania: 2021", "O programie", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

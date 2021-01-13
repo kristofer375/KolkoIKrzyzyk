@@ -29,6 +29,7 @@ namespace KolkoIKrzyzyk
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -41,6 +42,16 @@ namespace KolkoIKrzyzyk
             this.button10 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.nowaGraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.otwórzToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zapiszToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.toolStripDropDownButton3 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.oProgramieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label1 = new System.Windows.Forms.Label();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -157,7 +168,7 @@ namespace KolkoIKrzyzyk
             // 
             this.textBox1.BackColor = System.Drawing.Color.Chartreuse;
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBox1.Location = new System.Drawing.Point(30, 116);
+            this.textBox1.Location = new System.Drawing.Point(30, 80);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(112, 24);
@@ -168,20 +179,107 @@ namespace KolkoIKrzyzyk
             // textBox2
             // 
             this.textBox2.BackColor = System.Drawing.Color.Cyan;
+            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBox2.Location = new System.Drawing.Point(242, 116);
+            this.textBox2.Location = new System.Drawing.Point(242, 80);
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(112, 24);
+            this.textBox2.Size = new System.Drawing.Size(112, 17);
             this.textBox2.TabIndex = 11;
             this.textBox2.Text = "Gracz O";
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripDropDownButton1,
+            this.toolStripDropDownButton2,
+            this.toolStripDropDownButton3});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(384, 25);
+            this.toolStrip1.TabIndex = 12;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripDropDownButton1
+            // 
+            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.nowaGraToolStripMenuItem,
+            this.otwórzToolStripMenuItem,
+            this.zapiszToolStripMenuItem});
+            this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
+            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(39, 22);
+            this.toolStripDropDownButton1.Text = "Plik";
+            // 
+            // nowaGraToolStripMenuItem
+            // 
+            this.nowaGraToolStripMenuItem.Name = "nowaGraToolStripMenuItem";
+            this.nowaGraToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.nowaGraToolStripMenuItem.Text = "Nowa gra";
+            this.nowaGraToolStripMenuItem.Click += new System.EventHandler(this.nowaGraToolStripMenuItem_Click);
+            // 
+            // otwórzToolStripMenuItem
+            // 
+            this.otwórzToolStripMenuItem.Enabled = false;
+            this.otwórzToolStripMenuItem.Name = "otwórzToolStripMenuItem";
+            this.otwórzToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.otwórzToolStripMenuItem.Text = "Otwórz...";
+            // 
+            // zapiszToolStripMenuItem
+            // 
+            this.zapiszToolStripMenuItem.Enabled = false;
+            this.zapiszToolStripMenuItem.Name = "zapiszToolStripMenuItem";
+            this.zapiszToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.zapiszToolStripMenuItem.Text = "Zapisz";
+            // 
+            // toolStripDropDownButton2
+            // 
+            this.toolStripDropDownButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripDropDownButton2.Enabled = false;
+            this.toolStripDropDownButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton2.Image")));
+            this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
+            this.toolStripDropDownButton2.Size = new System.Drawing.Size(87, 22);
+            this.toolStripDropDownButton2.Text = "Konfiguracja";
+            // 
+            // toolStripDropDownButton3
+            // 
+            this.toolStripDropDownButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripDropDownButton3.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.oProgramieToolStripMenuItem});
+            this.toolStripDropDownButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton3.Image")));
+            this.toolStripDropDownButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton3.Name = "toolStripDropDownButton3";
+            this.toolStripDropDownButton3.Size = new System.Drawing.Size(58, 22);
+            this.toolStripDropDownButton3.Text = "Pomoc";
+            // 
+            // oProgramieToolStripMenuItem
+            // 
+            this.oProgramieToolStripMenuItem.Name = "oProgramieToolStripMenuItem";
+            this.oProgramieToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.oProgramieToolStripMenuItem.Text = "O programie...";
+            this.oProgramieToolStripMenuItem.Click += new System.EventHandler(this.oProgramieToolStripMenuItem_Click);
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label1.Location = new System.Drawing.Point(36, 126);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(312, 30);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Runda nr 1 - Gracz X";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(384, 586);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button10);
@@ -198,6 +296,8 @@ namespace KolkoIKrzyzyk
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Kółko i krzyżyk (v.2)";
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -217,6 +317,15 @@ namespace KolkoIKrzyzyk
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
+        private System.Windows.Forms.ToolStripMenuItem nowaGraToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem otwórzToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem zapiszToolStripMenuItem;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton2;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton3;
+        private System.Windows.Forms.ToolStripMenuItem oProgramieToolStripMenuItem;
+        private System.Windows.Forms.Label label1;
     }
 }
 
