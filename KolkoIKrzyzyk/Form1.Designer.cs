@@ -51,6 +51,7 @@ namespace KolkoIKrzyzyk
             this.toolStripDropDownButton3 = new System.Windows.Forms.ToolStripDropDownButton();
             this.oProgramieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
+            this.zmien = new System.Windows.Forms.Button();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -273,11 +274,22 @@ namespace KolkoIKrzyzyk
             this.label1.Text = "Runda nr 1 - Gracz X";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // zmien
+            // 
+            this.zmien.Location = new System.Drawing.Point(157, 80);
+            this.zmien.Name = "zmien";
+            this.zmien.Size = new System.Drawing.Size(70, 23);
+            this.zmien.TabIndex = 14;
+            this.zmien.Text = "Zmień...";
+            this.zmien.UseVisualStyleBackColor = true;
+            this.zmien.Click += new System.EventHandler(this.zmien_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(384, 586);
+            this.Controls.Add(this.zmien);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.textBox2);
@@ -326,6 +338,7 @@ namespace KolkoIKrzyzyk
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton3;
         private System.Windows.Forms.ToolStripMenuItem oProgramieToolStripMenuItem;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button zmien;
     }
 }
 

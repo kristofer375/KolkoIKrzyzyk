@@ -39,7 +39,8 @@ namespace KolkoIKrzyzyk
         }
         public void ChechForWinner()
         {
-            
+            if(zmien.Enabled == true)
+                zmien.Enabled = false;
             for(int i=0; i <8; i++)
             {
                 String combination = "";
@@ -105,6 +106,7 @@ namespace KolkoIKrzyzyk
                     ChangeColor(two, "O");
                     ChangeColor(three, "O");
                     wygrana = true;
+                    currentTurn--;
                     break;
                 } else if (combination.Equals("XXX"))
                 {
@@ -199,6 +201,7 @@ namespace KolkoIKrzyzyk
         {
             currentTurn = 0;
             wygrana = false;
+            zmien.Enabled = true;
             label1.Text = "Runda nr 1 - Gracz X";
             textBox1.BorderStyle = BorderStyle.Fixed3D;
             textBox2.BorderStyle = BorderStyle.None;
@@ -263,14 +266,14 @@ namespace KolkoIKrzyzyk
                     switch (currentTurn % 2)
                     {
                         case 0:
-                            label1.Text += "Wygrał Gracz O w ";
+                            label1.Text += "Wygrywa " + textBox1.Text + " w ";
                             break;
                         case 1:
-                            label1.Text += "Wygrał Gracz X w ";
+                            label1.Text += "Wygrywa " + textBox2.Text + " w ";
                             break;
                     }
                 }
-                switch ((currentTurn-1) / 2)
+                switch ((currentTurn) / 2)
                 {
                     case 0:
                         label1.Text += "Runda nr 1";
@@ -293,10 +296,12 @@ namespace KolkoIKrzyzyk
                     switch (currentTurn % 2)
                     {
                         case 0:
-                            label1.Text += " - Gracz X";
+                            label1.Text += " - ";
+                            label1.Text += textBox1.Text;
                             break;
                         case 1:
-                            label1.Text += " - Gracz O";
+                            label1.Text += " - ";
+                            label1.Text += textBox2.Text;
                             break;
                     }
                 }
@@ -415,6 +420,19 @@ namespace KolkoIKrzyzyk
         private void oProgramieToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Kółko i krzyżyk\n\nAutor: Krzysztof Żmuda\nWersja: 2\nRok Wydania: 2021", "O programie", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void zmien_Click(object sender, EventArgs e)
+        {
+            using (Form2 form2 = new Form2())
+            {
+                if(form2.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    textBox1.Text = form2.graczx;
+                    textBox2.Text = form2.graczo;
+                    label1.Text = "Runda nr 1 - " + textBox1.Text;
+                }
+            }
         }
     }
 }
