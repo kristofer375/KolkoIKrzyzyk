@@ -12,6 +12,8 @@ namespace KolkoIKrzyzyk
 {
     public partial class Form1 : Form
     {
+        public static string tekst1 = "Gracz X";
+        public static string tekst2 = "Gracz O";
         public Form1()
         {
             InitializeComponent();
@@ -106,7 +108,6 @@ namespace KolkoIKrzyzyk
                     ChangeColor(two, "O");
                     ChangeColor(three, "O");
                     wygrana = true;
-                    currentTurn--;
                     break;
                 } else if (combination.Equals("XXX"))
                 {
@@ -265,11 +266,12 @@ namespace KolkoIKrzyzyk
                 {
                     switch (currentTurn % 2)
                     {
-                        case 0:
+                        case 1:
                             label1.Text += "Wygrywa " + textBox1.Text + " w ";
                             break;
-                        case 1:
+                        case 0:
                             label1.Text += "Wygrywa " + textBox2.Text + " w ";
+                            currentTurn--;
                             break;
                     }
                 }
@@ -426,10 +428,12 @@ namespace KolkoIKrzyzyk
         {
             using (Form2 form2 = new Form2())
             {
-                if(form2.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                form2.graczx = textBox1.Text;
+                form2.graczo = textBox2.Text;
+                if (form2.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    textBox1.Text = form2.graczx;
-                    textBox2.Text = form2.graczo;
+                    tekst1 = textBox1.Text = form2.graczx;
+                    tekst2 = textBox2.Text = form2.graczo;
                     label1.Text = "Runda nr 1 - " + textBox1.Text;
                 }
             }

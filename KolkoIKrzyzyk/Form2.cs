@@ -12,11 +12,14 @@ namespace KolkoIKrzyzyk
 {
     public partial class Form2 : Form
     {
-        public string graczx = "Gracz X";
-        public string graczo = "Gracz O";
+        public string graczx = Form1.tekst1;
+        public string graczo = Form1.tekst2;
+        
         public Form2()
         {
             InitializeComponent();
+            textBox1.Text = graczx;
+            textBox2.Text = graczo;
         }
 
         private void button1_Click(object sender, EventArgs e)
