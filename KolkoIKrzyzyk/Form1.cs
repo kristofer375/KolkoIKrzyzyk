@@ -22,7 +22,7 @@ namespace KolkoIKrzyzyk
         String[] gameBoard = new string[9];
         int currentTurn = 0;
         bool wygrana = false;
-        public String ReturneSymble(int turn)
+        public String ReturneSymbole(int turn)
         {
             if(turn % 2 == 1)
                 return "X";
@@ -39,7 +39,7 @@ namespace KolkoIKrzyzyk
             }
             return System.Drawing.Color.White;
         }
-        public void ChechForWinner()
+        public void CheckForWinner()
         {
             if(zmien.Enabled == true)
                 zmien.Enabled = false;
@@ -309,103 +309,145 @@ namespace KolkoIKrzyzyk
                 }
             }
         }
+        public Button[,] RuchKomputera(Button[,] g, int r)
+        {
+            for(int x=0; x < 3; x++)
+            {
+                for(int y=0; y < 3; y++)
+                {
+                    if(g[x, y].Text == g[x, (y+1)%3].Text && g[x, y].Text != " ")
+                    {
+                        g[x, (y + 2) % 3].Text = ReturneSymbole(r);
+                        g[x, (y + 2) % 3].BackColor = DetermineColor(g[x, (y + 2) % 3].Text);
+                        return g;
+                    }else if (g[x, y].Text == g[(x + 1)%3, y].Text && g[x, y].Text != " ")
+                    {
+                        g[(x + 2) % 3, y].Text = ReturneSymbole(r);
+                        g[(x + 2) % 3, y].BackColor = DetermineColor(g[(x + 2) % 3, y].Text);
+                        return g;
+                    }else if (g[x, y].Text == g[(x + 1) % 3, (y + 1) % 3].Text && g[x, y].Text != " ")
+                    {
+                        g[(x + 2) % 3, (y + 2) % 3].Text = ReturneSymbole(r);
+                        g[(x + 2) % 3, (y + 2) % 3].BackColor = DetermineColor(g[(x + 2) % 3, (y + 2) % 3].Text);
+                        return g; 
+                    }else if (g[x, y].Text == g[(x + 1) % 3, (y + 2) % 3].Text && g[x, y].Text != " ")
+                    {
+                        g[(x + 2) % 3, (y + 1) % 3].Text = ReturneSymbole(r);
+                        g[(x + 2) % 3, (y + 1) % 3].BackColor = DetermineColor(g[(x + 2) % 3, (y + 1) % 3].Text);
+                        return g;
+                    }
+                }
+            }
+            Random losuj = new Random();
+            int a;
+            int b;
+            do
+            {
+                a = losuj.Next(0, 2);
+                b = losuj.Next(0, 2);
+
+            } while (g[a, b].Text != " ");
+            g[a, b].Text = ReturneSymbole(r);
+            g[a, b].BackColor = DetermineColor(g[a, b].Text);
+                return g;
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
             currentTurn++;
-            gameBoard[0] = ReturneSymble(currentTurn);
+            gameBoard[0] = ReturneSymbole(currentTurn);
             Color buttonColor = DetermineColor(gameBoard[0]);
             button1.BackColor = buttonColor;
             button1.Text = gameBoard[0];
-            ChechForWinner();
+            CheckForWinner();
             Rundy();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             currentTurn++;
-            gameBoard[1] = ReturneSymble(currentTurn);
+            gameBoard[1] = ReturneSymbole(currentTurn);
             Color buttonColor = DetermineColor(gameBoard[1]);
             button2.BackColor = buttonColor;
             button2.Text = gameBoard[1];
-            ChechForWinner();
+            CheckForWinner();
             Rundy();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             currentTurn++;
-            gameBoard[2] = ReturneSymble(currentTurn);
+            gameBoard[2] = ReturneSymbole(currentTurn);
             Color buttonColor = DetermineColor(gameBoard[2]);
             button3.BackColor = buttonColor;
             button3.Text = gameBoard[2];
-            ChechForWinner();
+            CheckForWinner();
             Rundy();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             currentTurn++;
-            gameBoard[3] = ReturneSymble(currentTurn);
+            gameBoard[3] = ReturneSymbole(currentTurn);
             Color buttonColor = DetermineColor(gameBoard[3]);
             button4.BackColor = buttonColor;
             button4.Text = gameBoard[3];
-            ChechForWinner();
+            CheckForWinner();
             Rundy();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             currentTurn++;
-            gameBoard[4] = ReturneSymble(currentTurn);
+            gameBoard[4] = ReturneSymbole(currentTurn);
             Color buttonColor = DetermineColor(gameBoard[4]);
             button5.BackColor = buttonColor;
             button5.Text = gameBoard[4];
-            ChechForWinner();
+            CheckForWinner();
             Rundy();
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
             currentTurn++;
-            gameBoard[5] = ReturneSymble(currentTurn);
+            gameBoard[5] = ReturneSymbole(currentTurn);
             Color buttonColor = DetermineColor(gameBoard[5]);
             button6.BackColor = buttonColor;
             button6.Text = gameBoard[5];
-            ChechForWinner();
+            CheckForWinner();
             Rundy();
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
             currentTurn++;
-            gameBoard[6] = ReturneSymble(currentTurn);
+            gameBoard[6] = ReturneSymbole(currentTurn);
             Color buttonColor = DetermineColor(gameBoard[6]);
             button7.BackColor = buttonColor;
             button7.Text = gameBoard[6];
-            ChechForWinner();
+            CheckForWinner();
             Rundy();
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
             currentTurn++;
-            gameBoard[7] = ReturneSymble(currentTurn);
+            gameBoard[7] = ReturneSymbole(currentTurn);
             Color buttonColor = DetermineColor(gameBoard[7]);
             button8.BackColor = buttonColor;
             button8.Text = gameBoard[7];
-            ChechForWinner();
+            CheckForWinner();
             Rundy();
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
             currentTurn++;
-            gameBoard[8] = ReturneSymble(currentTurn);
+            gameBoard[8] = ReturneSymbole(currentTurn);
             Color buttonColor = DetermineColor(gameBoard[8]);
             button9.BackColor = buttonColor;
             button9.Text = gameBoard[8];
-            ChechForWinner();
+            CheckForWinner();
             Rundy();
         }
 
