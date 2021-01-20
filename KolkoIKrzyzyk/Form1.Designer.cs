@@ -307,7 +307,7 @@ namespace KolkoIKrzyzyk
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Form1";
-            this.Text = "Kółko i krzyżyk (v.2)";
+            this.Text = "Kółko i krzyżyk (v.2.1)";
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);

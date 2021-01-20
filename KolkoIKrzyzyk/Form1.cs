@@ -12,13 +12,13 @@ namespace KolkoIKrzyzyk
 {
     public partial class Form1 : Form
     {
-        public static string gracz1 = "Gracz X";
-        public static string gracz2 = "Gracz O";
+        public static string player1 = "Gracz X";
+        public static string player2 = "Gracz O";
 
         Button[,] gameBoard = new Button[3, 3];
         int currentTurn = 0;
-        int wygrana = 0;
-        bool komputer = true;
+        int win = 0;
+        public static bool isComputer = false;
         public Form1()
         {
             InitializeComponent();
@@ -44,7 +44,7 @@ namespace KolkoIKrzyzyk
                 }
             return g;
         }
-        public Button[,] RuchGracza(Button[,] g, int turn, int x, int y)
+        public Button[,] PlayerMove(Button[,] g, int turn, int x, int y)
         {
             g[x, y].Text = ReturneSymbole(turn);
             g[x, y].BackColor = DetermineColor(g[x, y].Text);
@@ -184,9 +184,9 @@ namespace KolkoIKrzyzyk
         //            break;
         //    }
         //}
-        public Button[,] ReColor(Button[,] g, int numer)
+        public Button[,] ReColor(Button[,] g, int number)
         {
-            switch(numer)
+            switch(number)
             {
                 case 1:
                     if(g[0, 0].Text == "X")
@@ -290,7 +290,7 @@ namespace KolkoIKrzyzyk
         public void Reset()
         {
             currentTurn = 0;
-            wygrana = 0;
+            win = 0;
             zmien.Enabled = true;
             label1.Text = "Runda nr 1 - Gracz X";
             textBox1.BorderStyle = BorderStyle.Fixed3D;
@@ -336,7 +336,7 @@ namespace KolkoIKrzyzyk
             button8.Enabled = !button8.Enabled;
             button9.Enabled = !button9.Enabled;
         }
-        public void Rundy()
+        public void Rounds()
         {
             if(label1.Text != "Remis!")
             {
@@ -351,7 +351,7 @@ namespace KolkoIKrzyzyk
                     textBox1.BorderStyle = BorderStyle.None;
                     textBox2.BorderStyle = BorderStyle.Fixed3D;
                 }
-                if (wygrana > 0 && wygrana < 9)
+                if (win > 0 && win < 9)
                 {
                     switch (currentTurn % 2)
                     {
@@ -382,7 +382,7 @@ namespace KolkoIKrzyzyk
                         label1.Text += "Runda nr 5";
                         break;
                 }
-                if (wygrana == 0)
+                if (win == 0)
                 {
                     switch (currentTurn % 2)
                     {
@@ -398,7 +398,7 @@ namespace KolkoIKrzyzyk
                 }
             }
         }
-        public Button[,] RuchKomputera(Button[,] g, int r, int i, int j)
+        public Button[,] ComputerMove(Button[,] g, int r, int i, int j)
         {
             for(int x=0; x < 3; x++)
             {
@@ -414,12 +414,12 @@ namespace KolkoIKrzyzyk
                         g[(x + 2) % 3, y].Text = ReturneSymbole(r);
                         g[(x + 2) % 3, y].BackColor = DetermineColor(g[(x + 2) % 3, y].Text);
                         return g;
-                    }else if (g[x, y].Text == g[(x + 1) % 3, (y + 1) % 3].Text && g[x, y].Text != " " && g[(x + 2) % 3, (y + 2) % 3].Text == " ")
+                    }else if (x == y && g[x, y].Text == g[(x + 1) % 3, (y + 1) % 3].Text && g[x, y].Text != " " && g[(x + 2) % 3, (y + 2) % 3].Text == " ")
                     {
                         g[(x + 2) % 3, (y + 2) % 3].Text = ReturneSymbole(r);
                         g[(x + 2) % 3, (y + 2) % 3].BackColor = DetermineColor(g[(x + 2) % 3, (y + 2) % 3].Text);
                         return g; 
-                    }else if (g[x, y].Text == g[(x + 1) % 3, (y + 2) % 3].Text && g[x, y].Text != " " && g[(x + 2) % 3, (y + 1) % 3].Text == " ")
+                    }else if (x + y == 2 && g[x, y].Text == g[(x + 1) % 3, (y + 2) % 3].Text && g[x, y].Text != " " && g[(x + 2) % 3, (y + 1) % 3].Text == " ")
                     {
                         g[(x + 2) % 3, (y + 1) % 3].Text = ReturneSymbole(r);
                         g[(x + 2) % 3, (y + 1) % 3].BackColor = DetermineColor(g[(x + 2) % 3, (y + 1) % 3].Text);
@@ -427,13 +427,13 @@ namespace KolkoIKrzyzyk
                     }
                 }
             }
-            Random losuj = new Random();
+            Random random = new Random();
             int a;
             int b;
             do
             {
-                a = losuj.Next(0, 3);
-                b = losuj.Next(0, 3);
+                a = random.Next(0, 3);
+                b = random.Next(0, 3);
 
             }while (g[a, b].Text != " " || (a == i && b == j));
             g[a, b].Text = ReturneSymbole(r);
@@ -443,331 +443,371 @@ namespace KolkoIKrzyzyk
 
         private void button1_Click(object sender, EventArgs e)
         {
-            gameBoard = RuchGracza(gameBoard, ++currentTurn, 0, 0);
-            wygrana = CheckForWinner(gameBoard);
-            if(wygrana == 0)
+            if(button1.Text == " ")
             {
-                if(komputer && currentTurn < 9)
+                gameBoard = PlayerMove(gameBoard, ++currentTurn, 0, 0);
+                win = CheckForWinner(gameBoard);
+                if (win == 0)
                 {
-                    gameBoard = RuchKomputera(gameBoard, ++currentTurn, 0, 0);
-                    wygrana = CheckForWinner(gameBoard);
-                    if(wygrana == 0)
+                    if (isComputer && currentTurn < 9)
                     {
+                        gameBoard = ComputerMove(gameBoard, ++currentTurn, 0, 0);
+                        win = CheckForWinner(gameBoard);
+                        if (win == 0)
+                        {
 
-                    }else if(wygrana == 9)
-                    {
-                        ButtonSwitch();
-                        label1.Text = "Remis!";
-                    }else
-                    {
-                        gameBoard = ReColor(gameBoard, wygrana);
+                        }
+                        else if (win == 9)
+                        {
+                            ButtonSwitch();
+                            label1.Text = "Remis!";
+                        }
+                        else
+                        {
+                            gameBoard = ReColor(gameBoard, win);
+                        }
                     }
                 }
-            }else if(wygrana == 9)
-            {
-                ButtonSwitch();
-                label1.Text = "Remis!";
-            }else
-            {
-                gameBoard = ReColor(gameBoard, wygrana);
+                else if (win == 9)
+                {
+                    ButtonSwitch();
+                    label1.Text = "Remis!";
+                }
+                else
+                {
+                    ButtonSwitch();
+                    gameBoard = ReColor(gameBoard, win);
+                }
+                Rounds();
             }
-            Rundy();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            gameBoard = RuchGracza(gameBoard, ++currentTurn, 0, 1);
-            wygrana = CheckForWinner(gameBoard);
-            if (wygrana == 0)
+            if(button2.Text == " ")
             {
-                if (komputer && currentTurn < 9)
+                gameBoard = PlayerMove(gameBoard, ++currentTurn, 0, 1);
+                win = CheckForWinner(gameBoard);
+                if (win == 0)
                 {
-                    gameBoard = RuchKomputera(gameBoard, ++currentTurn, 0, 1);
-                    wygrana = CheckForWinner(gameBoard);
-                    if (wygrana == 0)
+                    if (isComputer && currentTurn < 9)
                     {
+                        gameBoard = ComputerMove(gameBoard, ++currentTurn, 0, 1);
+                        win = CheckForWinner(gameBoard);
+                        if (win == 0)
+                        {
 
-                    }
-                    else if (wygrana == 9)
-                    {
-                        ButtonSwitch();
-                        label1.Text = "Remis!";
-                    }
-                    else
-                    {
-                        gameBoard = ReColor(gameBoard, wygrana);
+                        }
+                        else if (win == 9)
+                        {
+                            ButtonSwitch();
+                            label1.Text = "Remis!";
+                        }
+                        else
+                        {
+                            gameBoard = ReColor(gameBoard, win);
+                        }
                     }
                 }
+                else if (win == 9)
+                {
+                    ButtonSwitch();
+                    label1.Text = "Remis!";
+                }
+                else
+                {
+                    ButtonSwitch();
+                    gameBoard = ReColor(gameBoard, win);
+                }
+                Rounds();
             }
-            else if (wygrana == 9)
-            {
-                ButtonSwitch();
-                label1.Text = "Remis!";
-            }
-            else
-            {
-                gameBoard = ReColor(gameBoard, wygrana);
-            }
-            Rundy();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            gameBoard = RuchGracza(gameBoard, ++currentTurn, 0, 2);
-            wygrana = CheckForWinner(gameBoard);
-            if (wygrana == 0)
+            if(button3.Text == " ")
             {
-                if (komputer && currentTurn < 9)
+                gameBoard = PlayerMove(gameBoard, ++currentTurn, 0, 2);
+                win = CheckForWinner(gameBoard);
+                if (win == 0)
                 {
-                    gameBoard = RuchKomputera(gameBoard, ++currentTurn, 0, 2);
-                    wygrana = CheckForWinner(gameBoard);
-                    if (wygrana == 0)
+                    if (isComputer && currentTurn < 9)
                     {
+                        gameBoard = ComputerMove(gameBoard, ++currentTurn, 0, 2);
+                        win = CheckForWinner(gameBoard);
+                        if (win == 0)
+                        {
 
-                    }
-                    else if (wygrana == 9)
-                    {
-                        ButtonSwitch();
-                        label1.Text = "Remis!";
-                    }
-                    else
-                    {
-                        gameBoard = ReColor(gameBoard, wygrana);
+                        }
+                        else if (win == 9)
+                        {
+                            ButtonSwitch();
+                            label1.Text = "Remis!";
+                        }
+                        else
+                        {
+                            gameBoard = ReColor(gameBoard, win);
+                        }
                     }
                 }
+                else if (win == 9)
+                {
+                    ButtonSwitch();
+                    label1.Text = "Remis!";
+                }
+                else
+                {
+                    ButtonSwitch();
+                    gameBoard = ReColor(gameBoard, win);
+                }
+                Rounds();
             }
-            else if (wygrana == 9)
-            {
-                ButtonSwitch();
-                label1.Text = "Remis!";
-            }
-            else
-            {
-                gameBoard = ReColor(gameBoard, wygrana);
-            }
-            Rundy();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            gameBoard = RuchGracza(gameBoard, ++currentTurn, 1, 0);
-            wygrana = CheckForWinner(gameBoard);
-            if (wygrana == 0)
+            if(button4.Text == " ")
             {
-                if (komputer && currentTurn < 9)
+                gameBoard = PlayerMove(gameBoard, ++currentTurn, 1, 0);
+                win = CheckForWinner(gameBoard);
+                if (win == 0)
                 {
-                    gameBoard = RuchKomputera(gameBoard, ++currentTurn, 1 ,0);
-                    wygrana = CheckForWinner(gameBoard);
-                    if (wygrana == 0)
+                    if (isComputer && currentTurn < 9)
                     {
+                        gameBoard = ComputerMove(gameBoard, ++currentTurn, 1, 0);
+                        win = CheckForWinner(gameBoard);
+                        if (win == 0)
+                        {
 
-                    }
-                    else if (wygrana == 9)
-                    {
-                        ButtonSwitch();
-                        label1.Text = "Remis!";
-                    }
-                    else
-                    {
-                        gameBoard = ReColor(gameBoard, wygrana);
+                        }
+                        else if (win == 9)
+                        {
+                            ButtonSwitch();
+                            label1.Text = "Remis!";
+                        }
+                        else
+                        {
+                            gameBoard = ReColor(gameBoard, win);
+                        }
                     }
                 }
+                else if (win == 9)
+                {
+                    ButtonSwitch();
+                    label1.Text = "Remis!";
+                }
+                else
+                {
+                    ButtonSwitch();
+                    gameBoard = ReColor(gameBoard, win);
+                }
+                Rounds();
             }
-            else if (wygrana == 9)
-            {
-                ButtonSwitch();
-                label1.Text = "Remis!";
-            }
-            else
-            {
-                gameBoard = ReColor(gameBoard, wygrana);
-            }
-            Rundy();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            gameBoard = RuchGracza(gameBoard, ++currentTurn, 1, 1);
-            wygrana = CheckForWinner(gameBoard);
-            if (wygrana == 0)
+            if(button5.Text == " ")
             {
-                if (komputer && currentTurn < 9)
+                gameBoard = PlayerMove(gameBoard, ++currentTurn, 1, 1);
+                win = CheckForWinner(gameBoard);
+                if (win == 0)
                 {
-                    gameBoard = RuchKomputera(gameBoard, ++currentTurn, 1, 1);
-                    wygrana = CheckForWinner(gameBoard);
-                    if (wygrana == 0)
+                    if (isComputer && currentTurn < 9)
                     {
+                        gameBoard = ComputerMove(gameBoard, ++currentTurn, 1, 1);
+                        win = CheckForWinner(gameBoard);
+                        if (win == 0)
+                        {
 
-                    }
-                    else if (wygrana == 9)
-                    {
-                        ButtonSwitch();
-                        label1.Text = "Remis!";
-                    }
-                    else
-                    {
-                        gameBoard = ReColor(gameBoard, wygrana);
+                        }
+                        else if (win == 9)
+                        {
+                            ButtonSwitch();
+                            label1.Text = "Remis!";
+                        }
+                        else
+                        {
+                            gameBoard = ReColor(gameBoard, win);
+                        }
                     }
                 }
+                else if (win == 9)
+                {
+                    ButtonSwitch();
+                    label1.Text = "Remis!";
+                }
+                else
+                {
+                    ButtonSwitch();
+                    gameBoard = ReColor(gameBoard, win);
+                }
+                Rounds();
             }
-            else if (wygrana == 9)
-            {
-                ButtonSwitch();
-                label1.Text = "Remis!";
-            }
-            else
-            {
-                gameBoard = ReColor(gameBoard, wygrana);
-            }
-            Rundy();
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            gameBoard = RuchGracza(gameBoard, ++currentTurn, 1, 2);
-            wygrana = CheckForWinner(gameBoard);
-            if (wygrana == 0)
+            if(button6.Text == " ")
             {
-                if (komputer && currentTurn < 9)
+                gameBoard = PlayerMove(gameBoard, ++currentTurn, 1, 2);
+                win = CheckForWinner(gameBoard);
+                if (win == 0)
                 {
-                    gameBoard = RuchKomputera(gameBoard, ++currentTurn, 1, 2);
-                    wygrana = CheckForWinner(gameBoard);
-                    if (wygrana == 0)
+                    if (isComputer && currentTurn < 9)
                     {
+                        gameBoard = ComputerMove(gameBoard, ++currentTurn, 1, 2);
+                        win = CheckForWinner(gameBoard);
+                        if (win == 0)
+                        {
 
-                    }
-                    else if (wygrana == 9)
-                    {
-                        ButtonSwitch();
-                        label1.Text = "Remis!";
-                    }
-                    else
-                    {
-                        gameBoard = ReColor(gameBoard, wygrana);
+                        }
+                        else if (win == 9)
+                        {
+                            ButtonSwitch();
+                            label1.Text = "Remis!";
+                        }
+                        else
+                        {
+                            gameBoard = ReColor(gameBoard, win);
+                        }
                     }
                 }
+                else if (win == 9)
+                {
+                    ButtonSwitch();
+                    label1.Text = "Remis!";
+                }
+                else
+                {
+                    ButtonSwitch();
+                    gameBoard = ReColor(gameBoard, win);
+                }
+                Rounds();
             }
-            else if (wygrana == 9)
-            {
-                ButtonSwitch();
-                label1.Text = "Remis!";
-            }
-            else
-            {
-                gameBoard = ReColor(gameBoard, wygrana);
-            }
-            Rundy();
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            gameBoard = RuchGracza(gameBoard, ++currentTurn, 2, 0);
-            wygrana = CheckForWinner(gameBoard);
-            if (wygrana == 0)
+            if(button7.Text == " ")
             {
-                if (komputer && currentTurn < 9)
+                gameBoard = PlayerMove(gameBoard, ++currentTurn, 2, 0);
+                win = CheckForWinner(gameBoard);
+                if (win == 0)
                 {
-                    gameBoard = RuchKomputera(gameBoard, ++currentTurn, 2, 0);
-                    wygrana = CheckForWinner(gameBoard);
-                    if (wygrana == 0)
+                    if (isComputer && currentTurn < 9)
                     {
+                        gameBoard = ComputerMove(gameBoard, ++currentTurn, 2, 0);
+                        win = CheckForWinner(gameBoard);
+                        if (win == 0)
+                        {
 
-                    }
-                    else if (wygrana == 9)
-                    {
-                        ButtonSwitch();
-                        label1.Text = "Remis!";
-                    }
-                    else
-                    {
-                        gameBoard = ReColor(gameBoard, wygrana);
+                        }
+                        else if (win == 9)
+                        {
+                            ButtonSwitch();
+                            label1.Text = "Remis!";
+                        }
+                        else
+                        {
+                            gameBoard = ReColor(gameBoard, win);
+                        }
                     }
                 }
+                else if (win == 9)
+                {
+                    ButtonSwitch();
+                    label1.Text = "Remis!";
+                }
+                else
+                {
+                    ButtonSwitch();
+                    gameBoard = ReColor(gameBoard, win);
+                }
+                Rounds();
             }
-            else if (wygrana == 9)
-            {
-                ButtonSwitch();
-                label1.Text = "Remis!";
-            }
-            else
-            {
-                gameBoard = ReColor(gameBoard, wygrana);
-            }
-            Rundy();
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            gameBoard = RuchGracza(gameBoard, ++currentTurn, 2, 1);
-            wygrana = CheckForWinner(gameBoard);
-            if (wygrana == 0)
+            if(button8.Text == " ")
             {
-                if (komputer && currentTurn < 9)
+                gameBoard = PlayerMove(gameBoard, ++currentTurn, 2, 1);
+                win = CheckForWinner(gameBoard);
+                if (win == 0)
                 {
-                    gameBoard = RuchKomputera(gameBoard, ++currentTurn, 2, 1);
-                    wygrana = CheckForWinner(gameBoard);
-                    if (wygrana == 0)
+                    if (isComputer && currentTurn < 9)
                     {
+                        gameBoard = ComputerMove(gameBoard, ++currentTurn, 2, 1);
+                        win = CheckForWinner(gameBoard);
+                        if (win == 0)
+                        {
 
-                    }
-                    else if (wygrana == 9)
-                    {
-                        ButtonSwitch();
-                        label1.Text = "Remis!";
-                    }
-                    else
-                    {
-                        gameBoard = ReColor(gameBoard, wygrana);
+                        }
+                        else if (win == 9)
+                        {
+                            ButtonSwitch();
+                            label1.Text = "Remis!";
+                        }
+                        else
+                        {
+                            gameBoard = ReColor(gameBoard, win);
+                        }
                     }
                 }
+                else if (win == 9)
+                {
+                    ButtonSwitch();
+                    label1.Text = "Remis!";
+                }
+                else
+                {
+                    ButtonSwitch();
+                    gameBoard = ReColor(gameBoard, win);
+                }
+                Rounds();
             }
-            else if (wygrana == 9)
-            {
-                ButtonSwitch();
-                label1.Text = "Remis!";
-            }
-            else
-            {
-                gameBoard = ReColor(gameBoard, wygrana);
-            }
-            Rundy();
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            gameBoard = RuchGracza(gameBoard, ++currentTurn, 2, 2);
-            wygrana = CheckForWinner(gameBoard);
-            if (wygrana == 0)
+            if(button9.Text == " ")
             {
-                if (komputer && currentTurn < 9)
+                gameBoard = PlayerMove(gameBoard, ++currentTurn, 2, 2);
+                win = CheckForWinner(gameBoard);
+                if (win == 0)
                 {
-                    gameBoard = RuchKomputera(gameBoard, ++currentTurn, 2, 2);
-                    wygrana = CheckForWinner(gameBoard);
-                    if (wygrana == 0)
+                    if (isComputer && currentTurn < 9)
                     {
+                        gameBoard = ComputerMove(gameBoard, ++currentTurn, 2, 2);
+                        win = CheckForWinner(gameBoard);
+                        if (win == 0)
+                        {
 
-                    }
-                    else if (wygrana == 9)
-                    {
-                        ButtonSwitch();
-                        label1.Text = "Remis!";
-                    }
-                    else
-                    {
-                        gameBoard = ReColor(gameBoard, wygrana);
+                        }
+                        else if (win == 9)
+                        {
+                            ButtonSwitch();
+                            label1.Text = "Remis!";
+                        }
+                        else
+                        {
+                            gameBoard = ReColor(gameBoard, win);
+                        }
                     }
                 }
+                else if (win == 9)
+                {
+                    ButtonSwitch();
+                    label1.Text = "Remis!";
+                }
+                else
+                {
+                    ButtonSwitch();
+                    gameBoard = ReColor(gameBoard, win);
+                }
+                Rounds();
             }
-            else if (wygrana == 9)
-            {
-                ButtonSwitch();
-                label1.Text = "Remis!";
-            }
-            else
-            {
-                gameBoard = ReColor(gameBoard, wygrana);
-            }
-            Rundy();
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -789,12 +829,13 @@ namespace KolkoIKrzyzyk
         {
             using (Form2 form2 = new Form2())
             {
-                form2.graczx = textBox1.Text;
-                form2.graczo = textBox2.Text;
+                form2.playerX = textBox1.Text;
+                form2.playerO = textBox2.Text;
                 if (form2.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    gracz1 = textBox1.Text = form2.graczx;
-                    gracz2 = textBox2.Text = form2.graczo;
+                    player1 = textBox1.Text = form2.playerX;
+                    player2 = textBox2.Text = form2.playerO;
+                    isComputer = form2.isChecked;
                     label1.Text = "Runda nr 1 - " + textBox1.Text;
                 }
             }
