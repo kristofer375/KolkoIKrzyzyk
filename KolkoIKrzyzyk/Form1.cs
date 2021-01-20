@@ -12,16 +12,44 @@ namespace KolkoIKrzyzyk
 {
     public partial class Form1 : Form
     {
-        public static string tekst1 = "Gracz X";
-        public static string tekst2 = "Gracz O";
+        public static string gracz1 = "Gracz X";
+        public static string gracz2 = "Gracz O";
+
+        Button[,] gameBoard = new Button[3, 3];
+        int currentTurn = 0;
+        int wygrana = 0;
+        bool komputer = true;
         public Form1()
         {
             InitializeComponent();
+            gameBoard = NewGameBoard(gameBoard);
         }
-
-        String[] gameBoard = new string[9];
-        int currentTurn = 0;
-        bool wygrana = false;
+        public Button[,] NewGameBoard(Button[,] g)
+        {
+            g[0, 0] = button1;
+            g[0, 1] = button2;
+            g[0, 2] = button3;
+            g[1, 0] = button4;
+            g[1, 1] = button5;
+            g[1, 2] = button6;
+            g[2, 0] = button7;
+            g[2, 1] = button8;
+            g[2, 2] = button9;
+            for(int i=0; i < 3; i++)
+                for(int j=0; j < 3; j++)
+                {
+                    g[i, j].Text = " ";
+                    g[i, j].BackColor = System.Drawing.Color.White;
+                    g[i, j].Enabled = true;
+                }
+            return g;
+        }
+        public Button[,] RuchGracza(Button[,] g, int turn, int x, int y)
+        {
+            g[x, y].Text = ReturneSymbole(turn);
+            g[x, y].BackColor = DetermineColor(g[x, y].Text);
+            return g;
+        }
         public String ReturneSymbole(int turn)
         {
             if(turn % 2 == 1)
@@ -39,169 +67,230 @@ namespace KolkoIKrzyzyk
             }
             return System.Drawing.Color.White;
         }
-        public void CheckForWinner()
+        public int CheckForWinner(Button[,] g)
         {
             if(zmien.Enabled == true)
                 zmien.Enabled = false;
-            for(int i=0; i <8; i++)
+            String combination = " ";
+            for(int i=1; i <10; i++)
             {
-                String combination = "";
-                int one = 0, two = 0, three = 0;
+                int temp = 0;
                 switch (i)
                 {
-                    case 0:
-                        combination = gameBoard[0] + gameBoard[4] + gameBoard[8];
-                        one = 0;
-                        two = 4;
-                        three = 8;
-                        break;
                     case 1:
-                        combination = gameBoard[2] + gameBoard[4] + gameBoard[6];
-                        one = 2;
-                        two = 4;
-                        three = 6;
+                        combination = g[0, 0].Text + g[0, 1].Text + g[0, 2].Text;
+                        temp = 1;
                         break;
                     case 2:
-                        combination = gameBoard[0] + gameBoard[1] + gameBoard[2];
-                        one = 0;
-                        two = 1;
-                        three = 2;
+                        combination = g[1, 0].Text + g[1, 1].Text + g[1, 2].Text;
+                        temp = 2;
                         break;
                     case 3:
-                        combination = gameBoard[3] + gameBoard[4] + gameBoard[5];
-                        one = 3;
-                        two = 4;
-                        three = 5;
+                        combination = g[2, 0].Text + g[2, 1].Text + g[2, 2].Text;
+                        temp = 3;
                         break;
                     case 4:
-                        combination = gameBoard[6] + gameBoard[7] + gameBoard[8];
-                        one = 6;
-                        two = 7;
-                        three = 8;
+                        combination = g[0, 0].Text + g[1, 0].Text + g[2, 0].Text;
+                        temp = 4;
                         break;
                     case 5:
-                        combination = gameBoard[0] + gameBoard[3] + gameBoard[6];
-                        one = 0;
-                        two = 3;
-                        three = 6;
+                        combination = g[0, 1].Text + g[1, 1].Text + g[2, 1].Text;
+                        temp = 5;
                         break;
                     case 6:
-                        combination = gameBoard[1] + gameBoard[4] + gameBoard[7];
-                        one = 1;
-                        two = 4;
-                        three = 7;
+                        combination = g[0, 2].Text + g[1, 2].Text + g[2, 2].Text;
+                        temp = 6;
                         break;
                     case 7:
-                        combination = gameBoard[2] + gameBoard[5] + gameBoard[8];
-                        one = 2;
-                        two = 5;
-                        three = 8;
+                        combination = g[0, 0].Text + g[1, 1].Text + g[2, 2].Text;
+                        temp = 7;
+                        break;
+                    case 8:
+                        combination = g[2, 0].Text + g[1, 1].Text + g[0, 2].Text;
+                        temp = 8;
+                        break;
+                    case 9:
+                        int counter = 0;
+                        for (int x = 0; x < 3; x++)
+                            for (int y = 0; y < 3; y++)
+                                if (g[x, y].Text != " ")
+                                    counter++;
+                        if (counter == 9)
+                            return 9;
                         break;
                 }
-
-                
-
-                if(combination.Equals("OOO"))
-                {
-                    ButtonSwitch();
-                    ChangeColor(one, "O");
-                    ChangeColor(two, "O");
-                    ChangeColor(three, "O");
-                    wygrana = true;
-                    break;
-                } else if (combination.Equals("XXX"))
-                {
-                    ButtonSwitch();
-                    ChangeColor(one, "X");
-                    ChangeColor(two, "X");
-                    ChangeColor(three, "X");
-                    wygrana = true;
-                    break;
-                } else if (i == 7)
-                {
-                    ChechDraw();
-                }
+                if (combination.Equals("OOO") || combination.Equals("XXX"))
+                    return temp;
             }
+            return 0;
         }
-
-        public void ChechDraw()
+        //public void ChangeColor(int number, string symbol)
+        //{
+        //    switch(number)
+        //    {
+        //        case 0:
+        //            if(symbol == "X")
+        //                button1.BackColor = System.Drawing.ColorTranslator.FromHtml("#468C00");
+        //            else
+        //                button1.BackColor = System.Drawing.ColorTranslator.FromHtml("#009494");
+        //            break;
+        //        case 1:
+        //            if (symbol == "X")
+        //                button2.BackColor = System.Drawing.ColorTranslator.FromHtml("#468C00");
+        //            else
+        //                button2.BackColor = System.Drawing.ColorTranslator.FromHtml("#009494");
+        //            break;
+        //        case 2:
+        //            if (symbol == "X")
+        //                button3.BackColor = System.Drawing.ColorTranslator.FromHtml("#468C00");
+        //            else
+        //                button3.BackColor = System.Drawing.ColorTranslator.FromHtml("#009494");
+        //            break;
+        //        case 3:
+        //            if (symbol == "X")
+        //                button4.BackColor = System.Drawing.ColorTranslator.FromHtml("#468C00");
+        //            else
+        //                button4.BackColor = System.Drawing.ColorTranslator.FromHtml("#009494");
+        //            break;
+        //        case 4:
+        //            if (symbol == "X")
+        //                button5.BackColor = System.Drawing.ColorTranslator.FromHtml("#468C00");
+        //            else
+        //                button5.BackColor = System.Drawing.ColorTranslator.FromHtml("#009494");
+        //            break;
+        //        case 5:
+        //            if (symbol == "X")
+        //                button6.BackColor = System.Drawing.ColorTranslator.FromHtml("#468C00");
+        //            else
+        //                button6.BackColor = System.Drawing.ColorTranslator.FromHtml("#009494");
+        //            break;
+        //        case 6:
+        //            if (symbol == "X")
+        //                button7.BackColor = System.Drawing.ColorTranslator.FromHtml("#468C00");
+        //            else
+        //                button7.BackColor = System.Drawing.ColorTranslator.FromHtml("#009494");
+        //            break;
+        //        case 7:
+        //            if (symbol == "X")
+        //                button8.BackColor = System.Drawing.ColorTranslator.FromHtml("#468C00");
+        //            else
+        //                button8.BackColor = System.Drawing.ColorTranslator.FromHtml("#009494");
+        //            break;
+        //        case 8:
+        //            if (symbol == "X")
+        //                button9.BackColor = System.Drawing.ColorTranslator.FromHtml("#468C00");
+        //            else
+        //                button9.BackColor = System.Drawing.ColorTranslator.FromHtml("#009494");
+        //            break;
+        //    }
+        //}
+        public Button[,] ReColor(Button[,] g, int numer)
         {
-            int counter = 0;
-            for(int i = 0; i < gameBoard.Length; i++)
+            switch(numer)
             {
-                if(gameBoard[i] != null)
-                    counter++;
-                if(counter == 9)
-                {
-                    ButtonSwitch();
-                    label1.Text = "Remis";
-                }
-            }
-        }
-        public void ChangeColor(int number, string symbol)
-        {
-            switch(number)
-            {
-                case 0:
-                    if(symbol == "X")
-                        button1.BackColor = System.Drawing.ColorTranslator.FromHtml("#468C00");
-                    else
-                        button1.BackColor = System.Drawing.ColorTranslator.FromHtml("#009494");
-                    break;
                 case 1:
-                    if (symbol == "X")
-                        button2.BackColor = System.Drawing.ColorTranslator.FromHtml("#468C00");
+                    if(g[0, 0].Text == "X")
+                    {
+                        g[0, 0].BackColor = System.Drawing.ColorTranslator.FromHtml("#468C00");
+                        g[0, 1].BackColor = g[0, 2].BackColor = g[0, 0].BackColor;
+                    }
                     else
-                        button2.BackColor = System.Drawing.ColorTranslator.FromHtml("#009494");
+                    {
+                        g[0, 0].BackColor = System.Drawing.ColorTranslator.FromHtml("#009494");
+                        g[0, 1].BackColor = g[0, 2].BackColor = g[0, 0].BackColor;
+                    }
                     break;
                 case 2:
-                    if (symbol == "X")
-                        button3.BackColor = System.Drawing.ColorTranslator.FromHtml("#468C00");
+                    if (g[1, 0].Text == "X")
+                    {
+                        g[1, 0].BackColor = System.Drawing.ColorTranslator.FromHtml("#468C00");
+                        g[1, 1].BackColor = g[1, 2].BackColor = g[1, 0].BackColor;
+                    }
                     else
-                        button3.BackColor = System.Drawing.ColorTranslator.FromHtml("#009494");
+                    {
+                        g[1, 0].BackColor = System.Drawing.ColorTranslator.FromHtml("#009494");
+                        g[1, 1].BackColor = g[1, 2].BackColor = g[1, 0].BackColor;
+                    }
                     break;
                 case 3:
-                    if (symbol == "X")
-                        button4.BackColor = System.Drawing.ColorTranslator.FromHtml("#468C00");
+                    if (g[2, 0].Text == "X")
+                    {
+                        g[2, 0].BackColor = System.Drawing.ColorTranslator.FromHtml("#468C00");
+                        g[2, 1].BackColor = g[2, 2].BackColor = g[2, 0].BackColor;
+                    }
                     else
-                        button4.BackColor = System.Drawing.ColorTranslator.FromHtml("#009494");
+                    {
+                        g[2, 0].BackColor = System.Drawing.ColorTranslator.FromHtml("#009494");
+                        g[2, 1].BackColor = g[2, 2].BackColor = g[2, 0].BackColor;
+                    }
                     break;
                 case 4:
-                    if (symbol == "X")
-                        button5.BackColor = System.Drawing.ColorTranslator.FromHtml("#468C00");
+                    if (g[0, 0].Text == "X")
+                    {
+                        g[0, 0].BackColor = System.Drawing.ColorTranslator.FromHtml("#468C00");
+                        g[1, 0].BackColor = g[2, 0].BackColor = g[0, 0].BackColor;
+                    }
                     else
-                        button5.BackColor = System.Drawing.ColorTranslator.FromHtml("#009494");
+                    {
+                        g[0, 0].BackColor = System.Drawing.ColorTranslator.FromHtml("#009494");
+                        g[1, 0].BackColor = g[2, 0].BackColor = g[0, 0].BackColor;
+                    }
                     break;
                 case 5:
-                    if (symbol == "X")
-                        button6.BackColor = System.Drawing.ColorTranslator.FromHtml("#468C00");
+                    if (g[0, 1].Text == "X")
+                    {
+                        g[0, 1].BackColor = System.Drawing.ColorTranslator.FromHtml("#468C00");
+                        g[1, 1].BackColor = g[2, 1].BackColor = g[0, 1].BackColor;
+                    }
                     else
-                        button6.BackColor = System.Drawing.ColorTranslator.FromHtml("#009494");
+                    {
+                        g[0, 1].BackColor = System.Drawing.ColorTranslator.FromHtml("#009494");
+                        g[1, 1].BackColor = g[2, 1].BackColor = g[0, 1].BackColor;
+                    }
                     break;
                 case 6:
-                    if (symbol == "X")
-                        button7.BackColor = System.Drawing.ColorTranslator.FromHtml("#468C00");
+                    if (g[0, 2].Text == "X")
+                    {
+                        g[0, 2].BackColor = System.Drawing.ColorTranslator.FromHtml("#468C00");
+                        g[1, 2].BackColor = g[2, 2].BackColor = g[0, 2].BackColor;
+                    }
                     else
-                        button7.BackColor = System.Drawing.ColorTranslator.FromHtml("#009494");
+                    {
+                        g[0, 2].BackColor = System.Drawing.ColorTranslator.FromHtml("#009494");
+                        g[1, 2].BackColor = g[2, 2].BackColor = g[0, 2].BackColor;
+                    }
                     break;
                 case 7:
-                    if (symbol == "X")
-                        button8.BackColor = System.Drawing.ColorTranslator.FromHtml("#468C00");
+                    if (g[0, 0].Text == "X")
+                    {
+                        g[0, 0].BackColor = System.Drawing.ColorTranslator.FromHtml("#468C00");
+                        g[1, 1].BackColor = g[2, 2].BackColor = g[0, 0].BackColor;
+                    }
                     else
-                        button8.BackColor = System.Drawing.ColorTranslator.FromHtml("#009494");
+                    {
+                        g[0, 0].BackColor = System.Drawing.ColorTranslator.FromHtml("#009494");
+                        g[1, 1].BackColor = g[2, 2].BackColor = g[0, 0].BackColor;
+                    }
                     break;
                 case 8:
-                    if (symbol == "X")
-                        button9.BackColor = System.Drawing.ColorTranslator.FromHtml("#468C00");
+                    if (g[2, 0].Text == "X")
+                    {
+                        g[2, 0].BackColor = System.Drawing.ColorTranslator.FromHtml("#468C00");
+                        g[1, 1].BackColor = g[0, 2].BackColor = g[2, 0].BackColor;
+                    }
                     else
-                        button9.BackColor = System.Drawing.ColorTranslator.FromHtml("#009494");
+                    {
+                        g[2, 0].BackColor = System.Drawing.ColorTranslator.FromHtml("#009494");
+                        g[1, 1].BackColor = g[0, 2].BackColor = g[2, 0].BackColor;
+                    }
                     break;
             }
+            return g;
         }
         public void Reset()
         {
             currentTurn = 0;
-            wygrana = false;
+            wygrana = 0;
             zmien.Enabled = true;
             label1.Text = "Runda nr 1 - Gracz X";
             textBox1.BorderStyle = BorderStyle.Fixed3D;
@@ -215,15 +304,15 @@ namespace KolkoIKrzyzyk
             button7.Enabled = true;
             button8.Enabled = true;
             button9.Enabled = true;
-            button1.Text = "";
-            button2.Text = "";
-            button3.Text = "";
-            button4.Text = "";
-            button5.Text = "";
-            button6.Text = "";
-            button7.Text = "";
-            button8.Text = "";
-            button9.Text = "";
+            button1.Text = " ";
+            button2.Text = " ";
+            button3.Text = " ";
+            button4.Text = " ";
+            button5.Text = " ";
+            button6.Text = " ";
+            button7.Text = " ";
+            button8.Text = " ";
+            button9.Text = " ";
             button1.BackColor = System.Drawing.Color.White;
             button2.BackColor = System.Drawing.Color.White;
             button3.BackColor = System.Drawing.Color.White;
@@ -233,7 +322,7 @@ namespace KolkoIKrzyzyk
             button7.BackColor = System.Drawing.Color.White;
             button8.BackColor = System.Drawing.Color.White;
             button9.BackColor = System.Drawing.Color.White;
-            gameBoard = new string[9];
+            gameBoard = NewGameBoard(gameBoard);
         }
         public void ButtonSwitch()
         {
@@ -249,7 +338,7 @@ namespace KolkoIKrzyzyk
         }
         public void Rundy()
         {
-            if(label1.Text != "Remis")
+            if(label1.Text != "Remis!")
             {
                 label1.Text = "";
                 if (textBox1.BorderStyle == BorderStyle.None)
@@ -262,7 +351,7 @@ namespace KolkoIKrzyzyk
                     textBox1.BorderStyle = BorderStyle.None;
                     textBox2.BorderStyle = BorderStyle.Fixed3D;
                 }
-                if (wygrana)
+                if (wygrana > 0 && wygrana < 9)
                 {
                     switch (currentTurn % 2)
                     {
@@ -293,7 +382,7 @@ namespace KolkoIKrzyzyk
                         label1.Text += "Runda nr 5";
                         break;
                 }
-                if (!wygrana)
+                if (wygrana == 0)
                 {
                     switch (currentTurn % 2)
                     {
@@ -309,28 +398,28 @@ namespace KolkoIKrzyzyk
                 }
             }
         }
-        public Button[,] RuchKomputera(Button[,] g, int r)
+        public Button[,] RuchKomputera(Button[,] g, int r, int i, int j)
         {
             for(int x=0; x < 3; x++)
             {
                 for(int y=0; y < 3; y++)
                 {
-                    if(g[x, y].Text == g[x, (y+1)%3].Text && g[x, y].Text != " ")
+                    if(g[x, y].Text == g[x, (y+1)%3].Text && g[x, y].Text != " " && g[x, (y+2)%3].Text == " ")
                     {
                         g[x, (y + 2) % 3].Text = ReturneSymbole(r);
                         g[x, (y + 2) % 3].BackColor = DetermineColor(g[x, (y + 2) % 3].Text);
                         return g;
-                    }else if (g[x, y].Text == g[(x + 1)%3, y].Text && g[x, y].Text != " ")
+                    }else if (g[x, y].Text == g[(x + 1)%3, y].Text && g[x, y].Text != " " && g[(x + 2) % 3, y].Text == " ")
                     {
                         g[(x + 2) % 3, y].Text = ReturneSymbole(r);
                         g[(x + 2) % 3, y].BackColor = DetermineColor(g[(x + 2) % 3, y].Text);
                         return g;
-                    }else if (g[x, y].Text == g[(x + 1) % 3, (y + 1) % 3].Text && g[x, y].Text != " ")
+                    }else if (g[x, y].Text == g[(x + 1) % 3, (y + 1) % 3].Text && g[x, y].Text != " " && g[(x + 2) % 3, (y + 2) % 3].Text == " ")
                     {
                         g[(x + 2) % 3, (y + 2) % 3].Text = ReturneSymbole(r);
                         g[(x + 2) % 3, (y + 2) % 3].BackColor = DetermineColor(g[(x + 2) % 3, (y + 2) % 3].Text);
                         return g; 
-                    }else if (g[x, y].Text == g[(x + 1) % 3, (y + 2) % 3].Text && g[x, y].Text != " ")
+                    }else if (g[x, y].Text == g[(x + 1) % 3, (y + 2) % 3].Text && g[x, y].Text != " " && g[(x + 2) % 3, (y + 1) % 3].Text == " ")
                     {
                         g[(x + 2) % 3, (y + 1) % 3].Text = ReturneSymbole(r);
                         g[(x + 2) % 3, (y + 1) % 3].BackColor = DetermineColor(g[(x + 2) % 3, (y + 1) % 3].Text);
@@ -343,10 +432,10 @@ namespace KolkoIKrzyzyk
             int b;
             do
             {
-                a = losuj.Next(0, 2);
-                b = losuj.Next(0, 2);
+                a = losuj.Next(0, 3);
+                b = losuj.Next(0, 3);
 
-            } while (g[a, b].Text != " ");
+            }while (g[a, b].Text != " " || (a == i && b == j));
             g[a, b].Text = ReturneSymbole(r);
             g[a, b].BackColor = DetermineColor(g[a, b].Text);
                 return g;
@@ -354,100 +443,330 @@ namespace KolkoIKrzyzyk
 
         private void button1_Click(object sender, EventArgs e)
         {
-            currentTurn++;
-            gameBoard[0] = ReturneSymbole(currentTurn);
-            Color buttonColor = DetermineColor(gameBoard[0]);
-            button1.BackColor = buttonColor;
-            button1.Text = gameBoard[0];
-            CheckForWinner();
+            gameBoard = RuchGracza(gameBoard, ++currentTurn, 0, 0);
+            wygrana = CheckForWinner(gameBoard);
+            if(wygrana == 0)
+            {
+                if(komputer && currentTurn < 9)
+                {
+                    gameBoard = RuchKomputera(gameBoard, ++currentTurn, 0, 0);
+                    wygrana = CheckForWinner(gameBoard);
+                    if(wygrana == 0)
+                    {
+
+                    }else if(wygrana == 9)
+                    {
+                        ButtonSwitch();
+                        label1.Text = "Remis!";
+                    }else
+                    {
+                        gameBoard = ReColor(gameBoard, wygrana);
+                    }
+                }
+            }else if(wygrana == 9)
+            {
+                ButtonSwitch();
+                label1.Text = "Remis!";
+            }else
+            {
+                gameBoard = ReColor(gameBoard, wygrana);
+            }
             Rundy();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            currentTurn++;
-            gameBoard[1] = ReturneSymbole(currentTurn);
-            Color buttonColor = DetermineColor(gameBoard[1]);
-            button2.BackColor = buttonColor;
-            button2.Text = gameBoard[1];
-            CheckForWinner();
+            gameBoard = RuchGracza(gameBoard, ++currentTurn, 0, 1);
+            wygrana = CheckForWinner(gameBoard);
+            if (wygrana == 0)
+            {
+                if (komputer && currentTurn < 9)
+                {
+                    gameBoard = RuchKomputera(gameBoard, ++currentTurn, 0, 1);
+                    wygrana = CheckForWinner(gameBoard);
+                    if (wygrana == 0)
+                    {
+
+                    }
+                    else if (wygrana == 9)
+                    {
+                        ButtonSwitch();
+                        label1.Text = "Remis!";
+                    }
+                    else
+                    {
+                        gameBoard = ReColor(gameBoard, wygrana);
+                    }
+                }
+            }
+            else if (wygrana == 9)
+            {
+                ButtonSwitch();
+                label1.Text = "Remis!";
+            }
+            else
+            {
+                gameBoard = ReColor(gameBoard, wygrana);
+            }
             Rundy();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            currentTurn++;
-            gameBoard[2] = ReturneSymbole(currentTurn);
-            Color buttonColor = DetermineColor(gameBoard[2]);
-            button3.BackColor = buttonColor;
-            button3.Text = gameBoard[2];
-            CheckForWinner();
+            gameBoard = RuchGracza(gameBoard, ++currentTurn, 0, 2);
+            wygrana = CheckForWinner(gameBoard);
+            if (wygrana == 0)
+            {
+                if (komputer && currentTurn < 9)
+                {
+                    gameBoard = RuchKomputera(gameBoard, ++currentTurn, 0, 2);
+                    wygrana = CheckForWinner(gameBoard);
+                    if (wygrana == 0)
+                    {
+
+                    }
+                    else if (wygrana == 9)
+                    {
+                        ButtonSwitch();
+                        label1.Text = "Remis!";
+                    }
+                    else
+                    {
+                        gameBoard = ReColor(gameBoard, wygrana);
+                    }
+                }
+            }
+            else if (wygrana == 9)
+            {
+                ButtonSwitch();
+                label1.Text = "Remis!";
+            }
+            else
+            {
+                gameBoard = ReColor(gameBoard, wygrana);
+            }
             Rundy();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            currentTurn++;
-            gameBoard[3] = ReturneSymbole(currentTurn);
-            Color buttonColor = DetermineColor(gameBoard[3]);
-            button4.BackColor = buttonColor;
-            button4.Text = gameBoard[3];
-            CheckForWinner();
+            gameBoard = RuchGracza(gameBoard, ++currentTurn, 1, 0);
+            wygrana = CheckForWinner(gameBoard);
+            if (wygrana == 0)
+            {
+                if (komputer && currentTurn < 9)
+                {
+                    gameBoard = RuchKomputera(gameBoard, ++currentTurn, 1 ,0);
+                    wygrana = CheckForWinner(gameBoard);
+                    if (wygrana == 0)
+                    {
+
+                    }
+                    else if (wygrana == 9)
+                    {
+                        ButtonSwitch();
+                        label1.Text = "Remis!";
+                    }
+                    else
+                    {
+                        gameBoard = ReColor(gameBoard, wygrana);
+                    }
+                }
+            }
+            else if (wygrana == 9)
+            {
+                ButtonSwitch();
+                label1.Text = "Remis!";
+            }
+            else
+            {
+                gameBoard = ReColor(gameBoard, wygrana);
+            }
             Rundy();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            currentTurn++;
-            gameBoard[4] = ReturneSymbole(currentTurn);
-            Color buttonColor = DetermineColor(gameBoard[4]);
-            button5.BackColor = buttonColor;
-            button5.Text = gameBoard[4];
-            CheckForWinner();
+            gameBoard = RuchGracza(gameBoard, ++currentTurn, 1, 1);
+            wygrana = CheckForWinner(gameBoard);
+            if (wygrana == 0)
+            {
+                if (komputer && currentTurn < 9)
+                {
+                    gameBoard = RuchKomputera(gameBoard, ++currentTurn, 1, 1);
+                    wygrana = CheckForWinner(gameBoard);
+                    if (wygrana == 0)
+                    {
+
+                    }
+                    else if (wygrana == 9)
+                    {
+                        ButtonSwitch();
+                        label1.Text = "Remis!";
+                    }
+                    else
+                    {
+                        gameBoard = ReColor(gameBoard, wygrana);
+                    }
+                }
+            }
+            else if (wygrana == 9)
+            {
+                ButtonSwitch();
+                label1.Text = "Remis!";
+            }
+            else
+            {
+                gameBoard = ReColor(gameBoard, wygrana);
+            }
             Rundy();
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            currentTurn++;
-            gameBoard[5] = ReturneSymbole(currentTurn);
-            Color buttonColor = DetermineColor(gameBoard[5]);
-            button6.BackColor = buttonColor;
-            button6.Text = gameBoard[5];
-            CheckForWinner();
+            gameBoard = RuchGracza(gameBoard, ++currentTurn, 1, 2);
+            wygrana = CheckForWinner(gameBoard);
+            if (wygrana == 0)
+            {
+                if (komputer && currentTurn < 9)
+                {
+                    gameBoard = RuchKomputera(gameBoard, ++currentTurn, 1, 2);
+                    wygrana = CheckForWinner(gameBoard);
+                    if (wygrana == 0)
+                    {
+
+                    }
+                    else if (wygrana == 9)
+                    {
+                        ButtonSwitch();
+                        label1.Text = "Remis!";
+                    }
+                    else
+                    {
+                        gameBoard = ReColor(gameBoard, wygrana);
+                    }
+                }
+            }
+            else if (wygrana == 9)
+            {
+                ButtonSwitch();
+                label1.Text = "Remis!";
+            }
+            else
+            {
+                gameBoard = ReColor(gameBoard, wygrana);
+            }
             Rundy();
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            currentTurn++;
-            gameBoard[6] = ReturneSymbole(currentTurn);
-            Color buttonColor = DetermineColor(gameBoard[6]);
-            button7.BackColor = buttonColor;
-            button7.Text = gameBoard[6];
-            CheckForWinner();
+            gameBoard = RuchGracza(gameBoard, ++currentTurn, 2, 0);
+            wygrana = CheckForWinner(gameBoard);
+            if (wygrana == 0)
+            {
+                if (komputer && currentTurn < 9)
+                {
+                    gameBoard = RuchKomputera(gameBoard, ++currentTurn, 2, 0);
+                    wygrana = CheckForWinner(gameBoard);
+                    if (wygrana == 0)
+                    {
+
+                    }
+                    else if (wygrana == 9)
+                    {
+                        ButtonSwitch();
+                        label1.Text = "Remis!";
+                    }
+                    else
+                    {
+                        gameBoard = ReColor(gameBoard, wygrana);
+                    }
+                }
+            }
+            else if (wygrana == 9)
+            {
+                ButtonSwitch();
+                label1.Text = "Remis!";
+            }
+            else
+            {
+                gameBoard = ReColor(gameBoard, wygrana);
+            }
             Rundy();
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            currentTurn++;
-            gameBoard[7] = ReturneSymbole(currentTurn);
-            Color buttonColor = DetermineColor(gameBoard[7]);
-            button8.BackColor = buttonColor;
-            button8.Text = gameBoard[7];
-            CheckForWinner();
+            gameBoard = RuchGracza(gameBoard, ++currentTurn, 2, 1);
+            wygrana = CheckForWinner(gameBoard);
+            if (wygrana == 0)
+            {
+                if (komputer && currentTurn < 9)
+                {
+                    gameBoard = RuchKomputera(gameBoard, ++currentTurn, 2, 1);
+                    wygrana = CheckForWinner(gameBoard);
+                    if (wygrana == 0)
+                    {
+
+                    }
+                    else if (wygrana == 9)
+                    {
+                        ButtonSwitch();
+                        label1.Text = "Remis!";
+                    }
+                    else
+                    {
+                        gameBoard = ReColor(gameBoard, wygrana);
+                    }
+                }
+            }
+            else if (wygrana == 9)
+            {
+                ButtonSwitch();
+                label1.Text = "Remis!";
+            }
+            else
+            {
+                gameBoard = ReColor(gameBoard, wygrana);
+            }
             Rundy();
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            currentTurn++;
-            gameBoard[8] = ReturneSymbole(currentTurn);
-            Color buttonColor = DetermineColor(gameBoard[8]);
-            button9.BackColor = buttonColor;
-            button9.Text = gameBoard[8];
-            CheckForWinner();
+            gameBoard = RuchGracza(gameBoard, ++currentTurn, 2, 2);
+            wygrana = CheckForWinner(gameBoard);
+            if (wygrana == 0)
+            {
+                if (komputer && currentTurn < 9)
+                {
+                    gameBoard = RuchKomputera(gameBoard, ++currentTurn, 2, 2);
+                    wygrana = CheckForWinner(gameBoard);
+                    if (wygrana == 0)
+                    {
+
+                    }
+                    else if (wygrana == 9)
+                    {
+                        ButtonSwitch();
+                        label1.Text = "Remis!";
+                    }
+                    else
+                    {
+                        gameBoard = ReColor(gameBoard, wygrana);
+                    }
+                }
+            }
+            else if (wygrana == 9)
+            {
+                ButtonSwitch();
+                label1.Text = "Remis!";
+            }
+            else
+            {
+                gameBoard = ReColor(gameBoard, wygrana);
+            }
             Rundy();
         }
 
@@ -463,7 +782,7 @@ namespace KolkoIKrzyzyk
 
         private void oProgramieToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Kółko i krzyżyk\n\nAutor: Krzysztof Żmuda\nWersja: 2\nRok Wydania: 2021", "O programie", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Kółko i krzyżyk\n\nAutor: Krzysztof Żmuda\nWersja: 2.1\nRok Wydania: 2021", "O programie", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void zmien_Click(object sender, EventArgs e)
@@ -474,8 +793,8 @@ namespace KolkoIKrzyzyk
                 form2.graczo = textBox2.Text;
                 if (form2.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    tekst1 = textBox1.Text = form2.graczx;
-                    tekst2 = textBox2.Text = form2.graczo;
+                    gracz1 = textBox1.Text = form2.graczx;
+                    gracz2 = textBox2.Text = form2.graczo;
                     label1.Text = "Runda nr 1 - " + textBox1.Text;
                 }
             }

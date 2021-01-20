@@ -12,8 +12,8 @@ namespace KolkoIKrzyzyk
 {
     public partial class Form2 : Form
     {
-        public string graczx = Form1.tekst1;
-        public string graczo = Form1.tekst2;
+        public string graczx = Form1.gracz1;
+        public string graczo = Form1.gracz2;
         
         public Form2()
         {
