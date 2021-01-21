@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using System.Threading;
+using System.Timers;
+
 namespace KolkoIKrzyzyk
 {
     public partial class Form1 : Form
@@ -18,7 +21,8 @@ namespace KolkoIKrzyzyk
         Button[,] gameBoard = new Button[3, 3];
         int currentTurn = 0;
         int win = 0;
-        public static bool isComputer = false;
+        public static bool isComputerX = false;
+        public static bool isComputerO = false;
         public Form1()
         {
             InitializeComponent();
@@ -449,7 +453,7 @@ namespace KolkoIKrzyzyk
                 win = CheckForWinner(gameBoard);
                 if (win == 0)
                 {
-                    if (isComputer && currentTurn < 9)
+                    if (isComputerO && currentTurn < 9)
                     {
                         gameBoard = ComputerMove(gameBoard, ++currentTurn, 0, 0);
                         win = CheckForWinner(gameBoard);
@@ -464,6 +468,7 @@ namespace KolkoIKrzyzyk
                         }
                         else
                         {
+                            ButtonSwitch();
                             gameBoard = ReColor(gameBoard, win);
                         }
                     }
@@ -479,6 +484,8 @@ namespace KolkoIKrzyzyk
                     gameBoard = ReColor(gameBoard, win);
                 }
                 Rounds();
+                if (currentTurn % 2 == 0 && isComputerX == true)
+                    button11_Click(sender, e);
             }
         }
 
@@ -490,7 +497,7 @@ namespace KolkoIKrzyzyk
                 win = CheckForWinner(gameBoard);
                 if (win == 0)
                 {
-                    if (isComputer && currentTurn < 9)
+                    if (isComputerO && currentTurn < 9)
                     {
                         gameBoard = ComputerMove(gameBoard, ++currentTurn, 0, 1);
                         win = CheckForWinner(gameBoard);
@@ -505,6 +512,7 @@ namespace KolkoIKrzyzyk
                         }
                         else
                         {
+                            ButtonSwitch();
                             gameBoard = ReColor(gameBoard, win);
                         }
                     }
@@ -520,6 +528,8 @@ namespace KolkoIKrzyzyk
                     gameBoard = ReColor(gameBoard, win);
                 }
                 Rounds();
+                if (currentTurn % 2 == 0 && isComputerX == true)
+                    button11_Click(sender, e);
             }
         }
 
@@ -531,7 +541,7 @@ namespace KolkoIKrzyzyk
                 win = CheckForWinner(gameBoard);
                 if (win == 0)
                 {
-                    if (isComputer && currentTurn < 9)
+                    if (isComputerO && currentTurn < 9)
                     {
                         gameBoard = ComputerMove(gameBoard, ++currentTurn, 0, 2);
                         win = CheckForWinner(gameBoard);
@@ -546,6 +556,7 @@ namespace KolkoIKrzyzyk
                         }
                         else
                         {
+                            ButtonSwitch();
                             gameBoard = ReColor(gameBoard, win);
                         }
                     }
@@ -561,6 +572,8 @@ namespace KolkoIKrzyzyk
                     gameBoard = ReColor(gameBoard, win);
                 }
                 Rounds();
+                if (currentTurn % 2 == 0 && isComputerX == true)
+                    button11_Click(sender, e);
             }
         }
 
@@ -572,7 +585,7 @@ namespace KolkoIKrzyzyk
                 win = CheckForWinner(gameBoard);
                 if (win == 0)
                 {
-                    if (isComputer && currentTurn < 9)
+                    if (isComputerO && currentTurn < 9)
                     {
                         gameBoard = ComputerMove(gameBoard, ++currentTurn, 1, 0);
                         win = CheckForWinner(gameBoard);
@@ -587,6 +600,7 @@ namespace KolkoIKrzyzyk
                         }
                         else
                         {
+                            ButtonSwitch();
                             gameBoard = ReColor(gameBoard, win);
                         }
                     }
@@ -602,6 +616,8 @@ namespace KolkoIKrzyzyk
                     gameBoard = ReColor(gameBoard, win);
                 }
                 Rounds();
+                if (currentTurn % 2 == 0 && isComputerX == true)
+                    button11_Click(sender, e);
             }
         }
 
@@ -613,7 +629,7 @@ namespace KolkoIKrzyzyk
                 win = CheckForWinner(gameBoard);
                 if (win == 0)
                 {
-                    if (isComputer && currentTurn < 9)
+                    if (isComputerO && currentTurn < 9)
                     {
                         gameBoard = ComputerMove(gameBoard, ++currentTurn, 1, 1);
                         win = CheckForWinner(gameBoard);
@@ -628,6 +644,7 @@ namespace KolkoIKrzyzyk
                         }
                         else
                         {
+                            ButtonSwitch();
                             gameBoard = ReColor(gameBoard, win);
                         }
                     }
@@ -643,6 +660,8 @@ namespace KolkoIKrzyzyk
                     gameBoard = ReColor(gameBoard, win);
                 }
                 Rounds();
+                if (currentTurn % 2 == 0 && isComputerX == true)
+                    button11_Click(sender, e);
             }
         }
 
@@ -654,7 +673,7 @@ namespace KolkoIKrzyzyk
                 win = CheckForWinner(gameBoard);
                 if (win == 0)
                 {
-                    if (isComputer && currentTurn < 9)
+                    if (isComputerO && currentTurn < 9)
                     {
                         gameBoard = ComputerMove(gameBoard, ++currentTurn, 1, 2);
                         win = CheckForWinner(gameBoard);
@@ -669,6 +688,7 @@ namespace KolkoIKrzyzyk
                         }
                         else
                         {
+                            ButtonSwitch();
                             gameBoard = ReColor(gameBoard, win);
                         }
                     }
@@ -684,6 +704,8 @@ namespace KolkoIKrzyzyk
                     gameBoard = ReColor(gameBoard, win);
                 }
                 Rounds();
+                if (currentTurn % 2 == 0 && isComputerX == true)
+                    button11_Click(sender, e);
             }
         }
 
@@ -695,7 +717,7 @@ namespace KolkoIKrzyzyk
                 win = CheckForWinner(gameBoard);
                 if (win == 0)
                 {
-                    if (isComputer && currentTurn < 9)
+                    if (isComputerO && currentTurn < 9)
                     {
                         gameBoard = ComputerMove(gameBoard, ++currentTurn, 2, 0);
                         win = CheckForWinner(gameBoard);
@@ -710,6 +732,7 @@ namespace KolkoIKrzyzyk
                         }
                         else
                         {
+                            ButtonSwitch();
                             gameBoard = ReColor(gameBoard, win);
                         }
                     }
@@ -725,6 +748,8 @@ namespace KolkoIKrzyzyk
                     gameBoard = ReColor(gameBoard, win);
                 }
                 Rounds();
+                if (currentTurn % 2 == 0 && isComputerX == true)
+                    button11_Click(sender, e);
             }
         }
 
@@ -736,7 +761,7 @@ namespace KolkoIKrzyzyk
                 win = CheckForWinner(gameBoard);
                 if (win == 0)
                 {
-                    if (isComputer && currentTurn < 9)
+                    if (isComputerO && currentTurn < 9)
                     {
                         gameBoard = ComputerMove(gameBoard, ++currentTurn, 2, 1);
                         win = CheckForWinner(gameBoard);
@@ -751,6 +776,7 @@ namespace KolkoIKrzyzyk
                         }
                         else
                         {
+                            ButtonSwitch();
                             gameBoard = ReColor(gameBoard, win);
                         }
                     }
@@ -766,18 +792,21 @@ namespace KolkoIKrzyzyk
                     gameBoard = ReColor(gameBoard, win);
                 }
                 Rounds();
+                if (currentTurn % 2 == 0 && isComputerX == true)
+                    button11_Click(sender, e);
             }
+
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            if(button9.Text == " ")
+            if (button9.Text == " ")
             {
                 gameBoard = PlayerMove(gameBoard, ++currentTurn, 2, 2);
                 win = CheckForWinner(gameBoard);
                 if (win == 0)
                 {
-                    if (isComputer && currentTurn < 9)
+                    if (isComputerO && currentTurn < 9)
                     {
                         gameBoard = ComputerMove(gameBoard, ++currentTurn, 2, 2);
                         win = CheckForWinner(gameBoard);
@@ -792,6 +821,7 @@ namespace KolkoIKrzyzyk
                         }
                         else
                         {
+                            ButtonSwitch();
                             gameBoard = ReColor(gameBoard, win);
                         }
                     }
@@ -807,12 +837,19 @@ namespace KolkoIKrzyzyk
                     gameBoard = ReColor(gameBoard, win);
                 }
                 Rounds();
+                if (currentTurn % 2 == 0 && isComputerX == true)
+                    button11_Click(sender, e);
             }
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
             Reset();
+            if (isComputerX == true)
+            {
+                ButtonSwitch();
+                button11.Visible = true;
+            }
         }
 
         private void nowaGraToolStripMenuItem_Click(object sender, EventArgs e)
@@ -822,7 +859,7 @@ namespace KolkoIKrzyzyk
 
         private void oProgramieToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Kółko i krzyżyk\n\nAutor: Krzysztof Żmuda\nWersja: 2.1\nRok Wydania: 2021", "O programie", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Kółko i krzyżyk\n\nAutor: Krzysztof Żmuda\nWersja: 2.2\nRok Wydania: 2021", "O programie", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void zmien_Click(object sender, EventArgs e)
@@ -835,10 +872,49 @@ namespace KolkoIKrzyzyk
                 {
                     player1 = textBox1.Text = form2.playerX;
                     player2 = textBox2.Text = form2.playerO;
-                    isComputer = form2.isChecked;
+                    Reset();
+                    isComputerX = form2.isCheckedX;
+                    if (isComputerX)
+                    {
+                        button11.Visible = true;
+                        ButtonSwitch();
+                    }
+                    else
+                        button11.Visible = false;
+                    isComputerO = form2.isCheckedO;
                     label1.Text = "Runda nr 1 - " + textBox1.Text;
                 }
             }
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            button11.Visible = false;
+            if(currentTurn == 0)
+                ButtonSwitch();
+            gameBoard = ComputerMove(gameBoard, ++currentTurn, 3, 3);
+            win = CheckForWinner(gameBoard);
+            Application.DoEvents();
+            Thread.Sleep(1000);
+            if (win == 0)
+            {
+                if (isComputerO == true)
+                {
+                    Rounds();
+                    button11_Click(sender, e);
+                }
+            }
+            else if (win == 9)
+            {
+                ButtonSwitch();
+                label1.Text = "Remis!";
+            }
+            else
+            {
+                ButtonSwitch();
+                gameBoard = ReColor(gameBoard, win);
+            }
+            Rounds();
         }
     }
 }

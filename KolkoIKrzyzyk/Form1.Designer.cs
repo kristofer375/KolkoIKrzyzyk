@@ -52,6 +52,7 @@ namespace KolkoIKrzyzyk
             this.oProgramieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.zmien = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -284,11 +285,23 @@ namespace KolkoIKrzyzyk
             this.zmien.UseVisualStyleBackColor = true;
             this.zmien.Click += new System.EventHandler(this.zmien_Click);
             // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(157, 562);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(75, 23);
+            this.button11.TabIndex = 15;
+            this.button11.Text = "START";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Visible = false;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(384, 586);
+            this.Controls.Add(this.button11);
             this.Controls.Add(this.zmien);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.toolStrip1);
@@ -307,7 +320,7 @@ namespace KolkoIKrzyzyk
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Form1";
-            this.Text = "Kółko i krzyżyk (v.2.1)";
+            this.Text = "Kółko i krzyżyk (v.2.2)";
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -339,6 +352,7 @@ namespace KolkoIKrzyzyk
         private System.Windows.Forms.ToolStripMenuItem oProgramieToolStripMenuItem;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button zmien;
+        private System.Windows.Forms.Button button11;
     }
 }
 
