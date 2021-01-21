@@ -455,6 +455,8 @@ namespace KolkoIKrzyzyk
                 {
                     if (isComputerO && currentTurn < 9)
                     {
+                        Application.DoEvents();
+                        Thread.Sleep(1000);
                         gameBoard = ComputerMove(gameBoard, ++currentTurn, 0, 0);
                         win = CheckForWinner(gameBoard);
                         if (win == 0)
@@ -499,6 +501,8 @@ namespace KolkoIKrzyzyk
                 {
                     if (isComputerO && currentTurn < 9)
                     {
+                        Application.DoEvents();
+                        Thread.Sleep(1000);
                         gameBoard = ComputerMove(gameBoard, ++currentTurn, 0, 1);
                         win = CheckForWinner(gameBoard);
                         if (win == 0)
@@ -543,6 +547,8 @@ namespace KolkoIKrzyzyk
                 {
                     if (isComputerO && currentTurn < 9)
                     {
+                        Application.DoEvents();
+                        Thread.Sleep(1000);
                         gameBoard = ComputerMove(gameBoard, ++currentTurn, 0, 2);
                         win = CheckForWinner(gameBoard);
                         if (win == 0)
@@ -587,6 +593,8 @@ namespace KolkoIKrzyzyk
                 {
                     if (isComputerO && currentTurn < 9)
                     {
+                        Application.DoEvents();
+                        Thread.Sleep(1000);
                         gameBoard = ComputerMove(gameBoard, ++currentTurn, 1, 0);
                         win = CheckForWinner(gameBoard);
                         if (win == 0)
@@ -631,6 +639,8 @@ namespace KolkoIKrzyzyk
                 {
                     if (isComputerO && currentTurn < 9)
                     {
+                        Application.DoEvents();
+                        Thread.Sleep(1000);
                         gameBoard = ComputerMove(gameBoard, ++currentTurn, 1, 1);
                         win = CheckForWinner(gameBoard);
                         if (win == 0)
@@ -675,6 +685,8 @@ namespace KolkoIKrzyzyk
                 {
                     if (isComputerO && currentTurn < 9)
                     {
+                        Application.DoEvents();
+                        Thread.Sleep(1000);
                         gameBoard = ComputerMove(gameBoard, ++currentTurn, 1, 2);
                         win = CheckForWinner(gameBoard);
                         if (win == 0)
@@ -719,6 +731,8 @@ namespace KolkoIKrzyzyk
                 {
                     if (isComputerO && currentTurn < 9)
                     {
+                        Application.DoEvents();
+                        Thread.Sleep(1000);
                         gameBoard = ComputerMove(gameBoard, ++currentTurn, 2, 0);
                         win = CheckForWinner(gameBoard);
                         if (win == 0)
@@ -763,6 +777,8 @@ namespace KolkoIKrzyzyk
                 {
                     if (isComputerO && currentTurn < 9)
                     {
+                        Application.DoEvents();
+                        Thread.Sleep(1000);
                         gameBoard = ComputerMove(gameBoard, ++currentTurn, 2, 1);
                         win = CheckForWinner(gameBoard);
                         if (win == 0)
@@ -808,6 +824,8 @@ namespace KolkoIKrzyzyk
                 {
                     if (isComputerO && currentTurn < 9)
                     {
+                        Application.DoEvents();
+                        Thread.Sleep(1000);
                         gameBoard = ComputerMove(gameBoard, ++currentTurn, 2, 2);
                         win = CheckForWinner(gameBoard);
                         if (win == 0)
@@ -892,10 +910,11 @@ namespace KolkoIKrzyzyk
             button11.Visible = false;
             if(currentTurn == 0)
                 ButtonSwitch();
-            gameBoard = ComputerMove(gameBoard, ++currentTurn, 3, 3);
-            win = CheckForWinner(gameBoard);
             Application.DoEvents();
             Thread.Sleep(1000);
+            gameBoard = ComputerMove(gameBoard, ++currentTurn, 3, 3);
+            win = CheckForWinner(gameBoard);
+            
             if (win == 0)
             {
                 if (isComputerO == true)

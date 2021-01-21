@@ -287,9 +287,9 @@ namespace KolkoIKrzyzyk
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(157, 562);
+            this.button11.Location = new System.Drawing.Point(142, 41);
             this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(75, 23);
+            this.button11.Size = new System.Drawing.Size(100, 23);
             this.button11.TabIndex = 15;
             this.button11.Text = "START";
             this.button11.UseVisualStyleBackColor = true;
